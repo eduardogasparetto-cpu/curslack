@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Integração Slack + Cursor | Ecommerce na Prática</title>
-  <meta name="description" content="Documentação completa da integração Slack + Cursor: como o time EnP usa um assistente de IA direto no Slack para automatizar tarefas de tecnologia.">
+  <meta name="description" content="Prova de conceito: como o time EnP usa um assistente de IA direto no Slack para criar tudo - banners, criativos, campanhas inteiras - sem abrir nenhum programa.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap">
   <style>
     :root {
@@ -138,6 +138,7 @@
       padding: 8px 16px;
       border-radius: 32px;
     }
+    .badge svg { width: 16px; height: 16px; }
 
     /* ── SECTIONS ── */
     .section { padding: 120px 0; }
@@ -150,7 +151,7 @@
       font-weight: 600;
       letter-spacing: 0.10em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--text-body);
       margin-bottom: 8px;
     }
 
@@ -200,16 +201,10 @@
     }
 
     .card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin-bottom: 16px;
-      font-size: 24px;
-      background: var(--bg-card-inner);
+      color: var(--text-heading);
     }
+    .card-icon svg { width: 24px; height: 24px; }
 
     /* ── STEPS V2 (redesign) ── */
     .steps-v2 {
@@ -320,7 +315,8 @@
       gap: 16px;
       user-select: none;
     }
-    .accordion-header h4 { flex: 1; margin: 0; }
+    .accordion-header h4 { flex: 1; margin: 0; display: flex; align-items: center; gap: 12px; }
+    .accordion-header h4 svg { width: 24px; height: 24px; flex-shrink: 0; color: var(--text-heading); }
     .accordion-toggle {
       width: 32px;
       height: 32px;
@@ -416,67 +412,22 @@
       color: #FFFFFF;
       transform: scale(0.98);
     }
-    .btn-secondary {
-      background: transparent;
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-    .btn-secondary:hover {
-      background: var(--accent);
-      color: #FFFFFF;
-    }
-    .btn-large { padding: 16px 32px; }
 
     /* ── FOOTER ── */
     .footer {
       background: var(--midnight);
       color: var(--gray-20);
-      padding: 80px 0 40px;
+      padding: 40px 0;
     }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
-    }
-    .footer-brand img { height: 32px; margin-bottom: 16px; }
-    .footer-brand p { font-size: 14px; color: var(--gray-40); line-height: 1.6; }
-    .footer h4 { color: #FFFFFF; font-size: 14px; margin-bottom: 16px; }
-    .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 8px; }
-    .footer-links a { color: var(--gray-20); font-size: 14px; }
-    .footer-links a:hover { color: #FFFFFF; }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.10);
-      padding-top: 24px;
+    .footer .container {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
     }
-    .footer-bottom p { font-size: 12px; color: var(--gray-40); }
-    .footer-bottom a { color: var(--sky-blue); font-size: 12px; }
-    .footer-bottom a:hover { color: #FFFFFF; }
-
-    /* ── PAGE LINK BANNER ── */
-    .page-link-banner {
-      background: linear-gradient(135deg, #1076DD 0%, #31B3F9 100%);
-      padding: 80px 0;
-    }
-    .page-link-banner h2 { color: #FFFFFF; margin-bottom: 16px; }
-    .page-link-banner p { color: rgba(255,255,255,0.9); font-size: 18px; margin-bottom: 32px; }
-    .page-link-banner .btn-primary {
-      background: #FFFFFF;
-      color: var(--accent);
-      font-size: 16px;
-      padding: 16px 32px;
-    }
-    .page-link-banner .btn-primary:hover {
-      background: var(--midnight);
-      color: #FFFFFF;
-      border-color: transparent;
-    }
+    .footer img { height: 32px; width: auto; }
+    .footer p { font-size: 14px; color: var(--gray-40); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -506,8 +457,6 @@
 
       .story-grid { grid-template-columns: 1fr; gap: 32px; }
 
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-
       .guide-step { flex-direction: column; }
       .guide-step-num { width: 48px; height: 48px; min-width: 48px; }
 
@@ -518,8 +467,6 @@
 
       .table-wrap { font-size: 14px; }
       .table-wrap th, .table-wrap td { padding: 12px 16px; }
-
-      .page-link-banner { padding: 60px 0; }
     }
   </style>
 </head>
@@ -535,8 +482,8 @@
         <span></span><span></span><span></span>
       </button>
       <div class="nav-links" id="navLinks">
-        <a href="#fazendo-historia">Fazendo historia</a>
-        <a href="#o-que-e">O que e</a>
+        <a href="#fazendo-historia">Fazendo história</a>
+        <a href="#o-que-e">O que é</a>
         <a href="#como-funciona">Como funciona</a>
         <a href="#capacidades">Capacidades</a>
         <a href="#comandos">Comandos</a>
@@ -548,74 +495,75 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <p class="eyebrow" style="color: rgba(255,255,255,0.8);">Cursor Agent + Slack + GitHub</p>
+      <p class="eyebrow" style="color: rgba(255,255,255,0.9);">Prova de Conceito</p>
       <h1>Integração Slack + Cursor</h1>
       <p class="hero-lead">
-        Um assistente de inteligência artificial que o time do Ecommerce na Prática
-        usa direto no Slack para criar páginas, editar arquivos, organizar projetos
-        e publicar mudanças - sem precisar abrir nenhum programa no computador.
+        Essa é uma prova de conceito. A ideia é que, através de um chat no Slack,
+        poderemos criar tudo - um novo banner, um criativo de última hora ou até uma
+        campanha inteira, durante uma reunião. Tudo isso diretamente do chat,
+        sem abrir nenhum programa.
       </p>
       <div class="hero-badges">
-        <span class="badge">&#x1F916; IA Autônoma</span>
-        <span class="badge">&#x1F4AC; Direto no Slack</span>
-        <span class="badge">&#x2601;&#xFE0F; Roda na Nuvem</span>
-        <span class="badge">&#x1F517; Conectado ao GitHub</span>
+        <span class="badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M11.883 2.876a3.9 3.9 0 0 1-1.202 1.202c.484.307.895.718 1.202 1.202a3.9 3.9 0 0 1 1.202-1.202 3.9 3.9 0 0 1-1.202-1.202m-.676-1.7c.126-.765 1.226-.765 1.352 0l.007.046a2.625 2.625 0 0 0 2.173 2.173h.001l.044.007c.766.126.766 1.226 0 1.352l-.045.007a2.625 2.625 0 0 0-2.173 2.173l-.007.045c-.126.766-1.226.766-1.352 0l-.007-.045a2.625 2.625 0 0 0-2.173-2.173l-.045-.007c-.766-.126-.766-1.226 0-1.352l.045-.007A2.625 2.625 0 0 0 11.2 1.222zm-5.673 3.93.109-.676v-.002c.138-.839 1.343-.839 1.48 0l.001.002.109.677a4.375 4.375 0 0 0 3.622 3.622l.677.109h.002c.839.138.839 1.343 0 1.48l-.002.001-.677.109a4.375 4.375 0 0 0-3.622 3.622l-.109.677v.002c-.138.839-1.343.839-1.48 0l-.001-.002-.109-.677a4.375 4.375 0 0 0-3.622-3.622l-.677-.109h-.002c-.839-.138-.839-1.343 0-1.48l.002-.001.677-.109a4.375 4.375 0 0 0 3.622-3.622m.85 1.524A5.63 5.63 0 0 1 3.435 9.58a5.63 5.63 0 0 1 2.948 2.948A5.63 5.63 0 0 1 9.332 9.58a5.63 5.63 0 0 1-2.949-2.95"/></svg> IA Autônoma</span>
+        <span class="badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2.19c3.13 0 5.68 2.25 5.68 5s-2.55 5-5.68 5a5.7 5.7 0 0 1-1.89-.29l-.75-.26-.56.56a14 14 0 0 1-2 1.55.13.13 0 0 1-.07 0v-.06a6.58 6.58 0 0 0 .15-4.29 5.25 5.25 0 0 1-.55-2.16c0-2.77 2.55-5 5.68-5M8 .94c-3.83 0-6.93 2.81-6.93 6.27a6.4 6.4 0 0 0 .64 2.64 5.53 5.53 0 0 1-.18 3.48 1.32 1.32 0 0 0 2 1.5 15 15 0 0 0 2.16-1.71 6.8 6.8 0 0 0 2.31.36c3.83 0 6.93-2.81 6.93-6.27S11.83.94 8 .94"/></svg> Direto no Slack</span>
+        <span class="badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M14.25 1.5H1.75A1.25 1.25 0 0 0 .5 2.75v7.5a1.25 1.25 0 0 0 1.25 1.25H6.1v1.75H4v1.25h8v-1.25H9.91V11.5h4.34a1.25 1.25 0 0 0 1.25-1.25v-7.5a1.25 1.25 0 0 0-1.25-1.25M8.66 13.25H7.35V11.5h1.31zm5.59-3H1.75v-7.5h12.5z"/></svg> Roda na Nuvem</span>
+        <span class="badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 6.1a.31.31 0 0 0-.45.32 2.47 2.47 0 0 0 .51 1.22l.15.13A3 3 0 0 1 9.08 10a3.63 3.63 0 0 1-3.55 3.44 3 3 0 0 1-2.11-.85 3 3 0 0 1-.85-2.22A3.55 3.55 0 0 1 3.63 8a3.66 3.66 0 0 1 1.5-.91A5.2 5.2 0 0 1 5 6v-.16a4.84 4.84 0 0 0-2.31 1.3 4.5 4.5 0 0 0-.2 6.37 4.16 4.16 0 0 0 3 1.22 4.8 4.8 0 0 0 3.38-1.42 4.52 4.52 0 0 0 .21-6.38A4.2 4.2 0 0 0 8 6.1"/><path d="M13.46 2.54a4.16 4.16 0 0 0-3-1.22 4.8 4.8 0 0 0-3.37 1.42 4.52 4.52 0 0 0-.21 6.38A4.2 4.2 0 0 0 8 9.9a.31.31 0 0 0 .45-.31 2.4 2.4 0 0 0-.52-1.23l-.15-.13A3 3 0 0 1 6.92 6a3.63 3.63 0 0 1 3.55-3.44 3 3 0 0 1 2.11.85 3 3 0 0 1 .85 2.22A3.55 3.55 0 0 1 12.37 8a3.66 3.66 0 0 1-1.5.91 5.2 5.2 0 0 1 .13 1.14v.16a4.84 4.84 0 0 0 2.31-1.3 4.5 4.5 0 0 0 .15-6.37"/></svg> Conectado ao GitHub</span>
       </div>
     </div>
   </section>
 
-  <!-- FAZENDO HISTORIA -->
+  <!-- FAZENDO HISTÓRIA -->
   <section class="section section-alt" id="fazendo-historia">
     <div class="container">
       <div class="section-header">
-        <p class="eyebrow">Fazendo historia &#x1F942;</p>
+        <p class="eyebrow">Fazendo história</p>
         <h2>Essa foi feita em uma conversa no Slack</h2>
-        <p>Tudo o que voce esta vendo aqui foi criado por um assistente de IA, sem ninguem abrir um editor de codigo.</p>
+        <p>Tudo o que você está vendo aqui foi criado por um assistente de IA, sem ninguém abrir um editor de código.</p>
       </div>
       <div class="story-grid">
         <div class="story-col">
           <p>
             O Edo (Eduardo Gasparetto) abriu o Slack,
-            mencionou <code>@Cursor</code> e pediu para o assistente criar uma documentacao para este projeto.
-            O assistente fez tudo certo, conforme o instruido: criou o arquivo, escreveu todo o conteudo e abriu um
-            pedido de aprovacao no GitHub para revisao.
+            mencionou <code>@Cursor</code> e pediu para o assistente criar uma documentação para este projeto.
+            O assistente fez tudo certo, conforme o instruído: criou o arquivo, escreveu todo o conteúdo e abriu um
+            pedido de aprovação no GitHub para revisão.
           </p>
           <p>
-            Depois, veio uma segunda instrucao - tambem pelo Slack - pedindo para transformar essa
-            documentacao numa pagina visual, seguindo a identidade do Ecommerce na Pratica.
+            Depois, veio uma segunda instrução - também pelo Slack - pedindo para transformar essa
+            documentação numa página visual, seguindo a identidade do Ecommerce na Prática.
           </p>
           <p>
-            Cada vez que alguem pede uma mudanca - como "alinha tudo a esquerda" ou "troca o gradiente" -
-            o assistente edita a pagina e publica a versao atualizada. Tudo via Slack, sem abrir
+            Cada vez que alguém pede uma mudança - como "alinha tudo à esquerda" ou "troca o gradiente" -
+            o assistente edita a página e publica a versão atualizada. Tudo via Slack, sem abrir
             nenhum outro programa.
           </p>
         </div>
         <div class="story-col">
           <p><strong>O que o assistente fez sozinho:</strong></p>
           <ul>
-            <li>Baixou as regras de identidade visual do EnP (cores, fontes, espacamentos)</li>
+            <li>Baixou as regras de identidade visual do EnP (cores, fontes, espaçamentos)</li>
             <li>Leu todas as diretrizes e aplicou automaticamente</li>
             <li>Usou o logo oficial do EnP direto do site <code>marca.ecommercenapratica.com</code></li>
-            <li>Criou a pagina com todo o visual e conteudo num unico arquivo</li>
-            <li>Garantiu que a pagina funciona bem no celular</li>
+            <li>Criou a página com todo o visual e conteúdo num único arquivo</li>
+            <li>Garantiu que a página funciona bem no celular</li>
             <li>Publicou tudo automaticamente</li>
           </ul>
           <div class="tip-box" style="margin-top: 16px;">
-            <p><strong>Aprendizado importante:</strong> sempre passe a URL exata do logo no pedido. Sem isso, o assistente pode usar um logo generico em vez do logo real da marca.</p>
+            <p><strong>Aprendizado importante:</strong> sempre passe a URL exata do logo no pedido. Sem isso, o assistente pode usar um logo genérico em vez do logo real da marca.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- O QUE E -->
+  <!-- O QUE É -->
   <section class="section" id="o-que-e">
     <div class="container">
       <div class="section-header">
-        <p class="eyebrow">Visao Geral</p>
-        <h2>O que e a Integracao Slack + Cursor?</h2>
+        <p class="eyebrow">Visão Geral</p>
+        <h2>O que é a Integração Slack + Cursor?</h2>
         <p>
-          E a conexao entre tres ferramentas: o <strong>Cursor</strong> (um editor de codigo com IA embutida),
+          É a conexão entre três ferramentas: o <strong>Cursor</strong> (um editor de código com IA embutida),
           o <strong>Slack</strong> (nosso chat de equipe) e o <strong>GitHub</strong> (a plataforma onde ficam guardados
           os arquivos dos nossos projetos). Juntos, eles criam um assistente que qualquer pessoa do time pode
           acionar por mensagem de texto - e ele faz o trabalho sozinho.
@@ -623,19 +571,19 @@
       </div>
       <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
         <div class="card">
-          <div class="card-icon">&#x1F4BB;</div>
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M14.25 1.5H1.75A1.25 1.25 0 0 0 .5 2.75v7.5a1.25 1.25 0 0 0 1.25 1.25H6.1v1.75H4v1.25h8v-1.25H9.91V11.5h4.34a1.25 1.25 0 0 0 1.25-1.25v-7.5a1.25 1.25 0 0 0-1.25-1.25M8.66 13.25H7.35V11.5h1.31zm5.59-3H1.75v-7.5h12.5z"/></svg></div>
           <h4>Sem precisar de computador</h4>
-          <p>O assistente roda numa maquina na nuvem. Voce manda a mensagem no Slack e pode ir tomar um cafe - ele trabalha sozinho.</p>
+          <p>O assistente roda numa máquina na nuvem. Você manda a mensagem no Slack e pode ir tomar um café - ele trabalha sozinho.</p>
         </div>
         <div class="card">
-          <div class="card-icon">&#x1F4AC;</div>
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2.19c3.13 0 5.68 2.25 5.68 5s-2.55 5-5.68 5a5.7 5.7 0 0 1-1.89-.29l-.75-.26-.56.56a14 14 0 0 1-2 1.55.13.13 0 0 1-.07 0v-.06a6.58 6.58 0 0 0 .15-4.29 5.25 5.25 0 0 1-.55-2.16c0-2.77 2.55-5 5.68-5M8 .94c-3.83 0-6.93 2.81-6.93 6.27a6.4 6.4 0 0 0 .64 2.64 5.53 5.53 0 0 1-.18 3.48 1.32 1.32 0 0 0 2 1.5 15 15 0 0 0 2.16-1.71 6.8 6.8 0 0 0 2.31.36c3.83 0 6.93-2.81 6.93-6.27S11.83.94 8 .94"/></svg></div>
           <h4>Conversa natural</h4>
-          <p>Voce escreve no Slack como se estivesse pedindo algo para um colega. Nao precisa saber nenhum comando especial.</p>
+          <p>Você escreve no Slack como se estivesse pedindo algo para um colega. Não precisa saber nenhum comando especial.</p>
         </div>
         <div class="card">
-          <div class="card-icon">&#x1F512;</div>
-          <h4>Seguro por padrao</h4>
-          <p>Antes de publicar qualquer mudanca, ele confere se nao ha senhas expostas e pede confirmacao antes de fazer algo que nao pode ser desfeito.</p>
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M7.25 11.2v1.42h1.5V11.2a1.48 1.48 0 0 0 .85-1.32A1.55 1.55 0 0 0 8 8.38a1.55 1.55 0 0 0-1.6 1.5 1.48 1.48 0 0 0 .85 1.32"/><path d="M14.75 5H13.5A5.29 5.29 0 0 0 8 0a5.29 5.29 0 0 0-5.5 5H1.25A1.25 1.25 0 0 0 0 6.25v8.5A1.25 1.25 0 0 0 1.25 16h13.5A1.25 1.25 0 0 0 16 14.75v-8.5A1.25 1.25 0 0 0 14.75 5M8 1.25A4.05 4.05 0 0 1 12.25 5h-8.5A4.05 4.05 0 0 1 8 1.25m6.75 13.5H1.25v-8.5h13.5z"/></svg></div>
+          <h4>Seguro por padrão</h4>
+          <p>Antes de publicar qualquer mudança, ele confere se não há senhas expostas e pede confirmação antes de fazer algo que não pode ser desfeito.</p>
         </div>
       </div>
     </div>
@@ -647,33 +595,33 @@
       <div class="section-header">
         <p class="eyebrow">Passo a Passo</p>
         <h2>Como funciona?</h2>
-        <p>De uma mensagem no Slack ate as mudancas publicadas - em cinco etapas automaticas.</p>
+        <p>De uma mensagem no Slack até as mudanças publicadas - em cinco etapas automáticas.</p>
       </div>
       <div class="steps-v2">
         <div class="step-v2">
           <div class="step-v2-num">1</div>
-          <h4>Voce pede</h4>
-          <p>Menciona <code>@Cursor</code> no Slack descrevendo o que precisa. Pode ser qualquer coisa: criar uma pagina, corrigir um problema, organizar arquivos.</p>
+          <h4>Você pede</h4>
+          <p>Menciona <code>@Cursor</code> no Slack descrevendo o que precisa. Pode ser qualquer coisa: criar uma página, corrigir um problema, organizar arquivos.</p>
         </div>
         <div class="step-v2">
           <div class="step-v2-num">2</div>
           <h4>Assistente inicia</h4>
-          <p>Um assistente e criado numa maquina isolada na nuvem. Ele tem acesso ao projeto e a todas as ferramentas necessarias.</p>
+          <p>Um assistente é criado numa máquina isolada na nuvem. Ele tem acesso ao projeto e a todas as ferramentas necessárias.</p>
         </div>
         <div class="step-v2">
           <div class="step-v2-num">3</div>
           <h4>Baixa o projeto</h4>
-          <p>Ele baixa os arquivos do projeto do GitHub, le tudo e entende a estrutura antes de comecar qualquer alteracao.</p>
+          <p>Ele baixa os arquivos do projeto do GitHub, lê tudo e entende a estrutura antes de começar qualquer alteração.</p>
         </div>
         <div class="step-v2">
           <div class="step-v2-num">4</div>
-          <h4>Faz as mudancas</h4>
-          <p>Edita, cria ou remove arquivos conforme necessario. Testa o que fez e confere se esta tudo certo.</p>
+          <h4>Faz as mudanças</h4>
+          <p>Edita, cria ou remove arquivos conforme necessário. Testa o que fez e confere se está tudo certo.</p>
         </div>
         <div class="step-v2 step-v2-final">
           <div class="step-v2-num">5</div>
           <h4>Publica o resultado</h4>
-          <p>Salva as alteracoes, publica no GitHub e cria um pedido de aprovacao para alguem do time revisar. Pronto - voce recebe a resposta direto no Slack.</p>
+          <p>Salva as alterações, publica no GitHub e cria um pedido de aprovação para alguém do time revisar. Pronto - você recebe a resposta direto no Slack.</p>
         </div>
       </div>
     </div>
@@ -685,23 +633,23 @@
       <div class="section-header">
         <p class="eyebrow">Tudo que o assistente sabe fazer</p>
         <h2>Capacidades</h2>
-        <p>O assistente tem acesso a varias ferramentas que permitem fazer praticamente qualquer tarefa que envolva arquivos, textos e projetos no GitHub.</p>
+        <p>O assistente tem acesso a várias ferramentas que permitem fazer praticamente qualquer tarefa que envolva arquivos, textos e projetos no GitHub.</p>
       </div>
       <div id="capabilities">
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F4DD; Criar e editar arquivos</h4>
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M13.8 2.2a2.51 2.51 0 0 0-3.54 0l-6.9 6.91-1.76 3.62a1.26 1.26 0 0 0 1.12 1.8 1.2 1.2 0 0 0 .55-.13l3.62-1.76 6-6 .83-.82.06-.06a2.52 2.52 0 0 0 .02-3.56m-.89.89a1.25 1.25 0 0 1 0 1.77l-1.77-1.77a1.24 1.24 0 0 1 .86-.37 1.22 1.22 0 0 1 .91.37M2.73 13.27 4.29 10 6 11.71zm4.16-2.4L5.13 9.11 10.26 4 12 5.74z"/></svg> Criar e editar arquivos</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>O assistente consegue abrir, ler, criar, editar e apagar qualquer arquivo de um projeto. Funciona com qualquer tipo de arquivo de texto - paginas HTML, planilhas de estilo, documentos, configuracoes, etc.</p>
+              <p>O assistente consegue abrir, ler, criar, editar e apagar qualquer arquivo de um projeto. Funciona com qualquer tipo de arquivo de texto - páginas HTML, planilhas de estilo, documentos, configurações, etc.</p>
               <ul>
-                <li>Le arquivos de texto, imagens e ate PDFs</li>
-                <li>Edita trechos especificos sem mexer no resto do arquivo</li>
-                <li>Cria novos arquivos quando necessario</li>
-                <li>Remove arquivos que nao sao mais usados</li>
+                <li>Lê arquivos de texto, imagens e até PDFs</li>
+                <li>Edita trechos específicos sem mexer no resto do arquivo</li>
+                <li>Cria novos arquivos quando necessário</li>
+                <li>Remove arquivos que não são mais usados</li>
               </ul>
             </div>
           </div>
@@ -709,15 +657,34 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F50D; Busca inteligente</h4>
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M13.5 6.73 11 5 7.68 7.53 6 6 2.5 8.49V11h11zm-1.25 3h-8.5v-.59L5.9 7.6l.94.86.77.7.83-.63 2.59-2 1.22.84z"/><path d="M14.75 2.5H1.25A1.25 1.25 0 0 0 0 3.75v8.5a1.25 1.25 0 0 0 1.25 1.25h13.5A1.25 1.25 0 0 0 16 12.25v-8.5a1.25 1.25 0 0 0-1.25-1.25m0 9.75H1.25v-8.5h13.5z"/></svg> Análise de imagens</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>O assistente entende e analisa o conteúdo visual de imagens (JPEG, PNG, GIF, WebP). Não só "abre o arquivo" - ele interpreta o que está na imagem:</p>
+              <ul>
+                <li>Recebe um <strong>screenshot de um bug</strong> e entende o que está acontecendo</li>
+                <li>Recebe uma <strong>foto de um rascunho no papel</strong> e transforma em código</li>
+                <li>Recebe um <strong>print de um site</strong> e recria o layout</li>
+                <li>Recebe um <strong>criativo exportado como imagem</strong> e implementa</li>
+              </ul>
+              <p><strong>Não entende:</strong> áudio (MP3, WAV) e vídeo (MP4, WebM).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="m14.91 13.09-3.68-3.21a4.86 4.86 0 0 0 .86-2.77A5.34 5.34 0 0 0 6.59 2a5.35 5.35 0 0 0-5.5 5.15 5.34 5.34 0 0 0 5.5 5.15 5.7 5.7 0 0 0 3.82-1.44L14.08 14zM6.59 11a4.09 4.09 0 0 1-4.25-3.9 4.09 4.09 0 0 1 4.25-3.9 4.09 4.09 0 0 1 4.25 3.9A4.08 4.08 0 0 1 6.59 11"/></svg> Busca inteligente</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
               <p>Mesmo em projetos com centenas de arquivos, o assistente encontra rapidamente o que precisa:</p>
               <ul>
-                <li><strong>Por nome</strong> - encontra arquivos pelo nome ou extensao (ex: "todos os arquivos HTML da pasta de templates")</li>
-                <li><strong>Por conteudo</strong> - encontra trechos especificos de texto dentro dos arquivos</li>
+                <li><strong>Por nome</strong> - encontra arquivos pelo nome ou extensão (ex: "todos os arquivos HTML da pasta de templates")</li>
+                <li><strong>Por conteúdo</strong> - encontra trechos específicos de texto dentro dos arquivos</li>
               </ul>
             </div>
           </div>
@@ -725,17 +692,17 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F5A5;&#xFE0F; Executar comandos</h4>
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="m9.539.613-3.9 14.55 1.209.324L10.746.937 9.54.612zm-5.63 3.434L.598 7.137a1.24 1.24 0 0 0 0 1.821l3.25 3.091.921-.85-3.321-3.15 3.321-3.112zm11.893 3.091-3.31-3.091-.861.91 3.32 3.091-3.32 3.111.92.85 3.251-3.05a1.24 1.24 0 0 0 0-1.821"/></svg> Executar comandos</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>O assistente pode executar comandos na maquina, como se fosse alguem usando o computador diretamente:</p>
+              <p>O assistente pode executar comandos na máquina, como se fosse alguém usando o computador diretamente:</p>
               <ul>
                 <li>Instala o que o projeto precisa para funcionar</li>
-                <li>Roda testes automaticos para verificar se nada quebrou</li>
+                <li>Roda testes automáticos para verificar se nada quebrou</li>
                 <li>Prepara e publica projetos</li>
-                <li>Cada comando pode rodar por ate 10 minutos</li>
+                <li>Cada comando pode rodar por até 10 minutos</li>
               </ul>
             </div>
           </div>
@@ -743,17 +710,17 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F500; Controle de versao</h4>
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8.06.56A8.05 8.05 0 0 0 1.24 4.2V1.55H0V5a1.16 1.16 0 0 0 1.15 1.14h3.44V4.9H2.27a6.79 6.79 0 0 1 5.79-3.1 6.48 6.48 0 0 1 6.7 6.2 6.48 6.48 0 0 1-6.7 6.2A6.48 6.48 0 0 1 1.36 8H.12a7.71 7.71 0 0 0 7.94 7.44A7.71 7.71 0 0 0 16 8 7.71 7.71 0 0 0 8.06.56"/><path d="M7.44 4.28v4.34h3.6V7.38H8.68v-3.1z"/></svg> Controle de versão</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Toda mudanca feita em arquivos e registrada num historico - assim, da para voltar atras se algo der errado. O assistente gerencia isso automaticamente:</p>
+              <p>Toda mudança feita em arquivos é registrada num histórico - assim, dá para voltar atrás se algo der errado. O assistente gerencia isso automaticamente:</p>
               <ul>
-                <li><strong>Salva</strong> as alteracoes com mensagens claras explicando o que mudou</li>
-                <li><strong>Publica</strong> as alteracoes no GitHub para o time ver</li>
-                <li><strong>Confere</strong> se nao ha senhas ou dados sensiveis antes de publicar</li>
-                <li><strong>Cria versoes separadas</strong> do projeto quando necessario, para nao mexer no que ja esta no ar</li>
+                <li><strong>Salva</strong> as alterações com mensagens claras explicando o que mudou</li>
+                <li><strong>Publica</strong> as alterações no GitHub para o time ver</li>
+                <li><strong>Confere</strong> se não há senhas ou dados sensíveis antes de publicar</li>
+                <li><strong>Cria versões separadas</strong> do projeto quando necessário, para não mexer no que já está no ar</li>
               </ul>
             </div>
           </div>
@@ -761,16 +728,16 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F4CB; Pedidos de aprovacao no GitHub</h4>
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M6.53 9.02 4.58 7.07l-.88.89 2.83 2.83.88-.89 4.78-4.77-.89-.88z"/><path d="M8 .5A7.77 7.77 0 0 0 0 8a7.77 7.77 0 0 0 8 7.5A7.77 7.77 0 0 0 16 8 7.77 7.77 0 0 0 8 .5m0 13.75A6.52 6.52 0 0 1 1.25 8 6.52 6.52 0 0 1 8 1.75 6.52 6.52 0 0 1 14.75 8 6.52 6.52 0 0 1 8 14.25"/></svg> Pedidos de aprovação no GitHub</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Quando o assistente termina uma tarefa, ele cria um "Pull Request" - que e basicamente um pedido de aprovacao. Alguem do time revisa o que foi feito antes de publicar oficialmente:</p>
+              <p>Quando o assistente termina uma tarefa, ele cria um "Pull Request" - que é basicamente um pedido de aprovação. Alguém do time revisa o que foi feito antes de publicar oficialmente:</p>
               <ul>
-                <li>Cria pedidos de aprovacao com titulo e descricao do que foi feito</li>
-                <li>Atualiza pedidos existentes se houver mais mudancas</li>
-                <li>Cria como rascunho por padrao - so publica quando alguem aprovar</li>
+                <li>Cria pedidos de aprovação com título e descrição do que foi feito</li>
+                <li>Atualiza pedidos existentes se houver mais mudanças</li>
+                <li>Cria como rascunho por padrão - só publica quando alguém aprovar</li>
               </ul>
             </div>
           </div>
@@ -778,17 +745,17 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F310; Pesquisa na web</h4>
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M16 7.38A7.82 7.82 0 0 0 8 .5a7.82 7.82 0 0 0-8 6.88v1.24a7.82 7.82 0 0 0 8 6.88 7.82 7.82 0 0 0 8-6.88zm-1.25 0h-3a11.3 11.3 0 0 0-.43-2.54 7.6 7.6 0 0 0 1.75-1 6 6 0 0 1 1.65 3.54zm-9.18 0a9.7 9.7 0 0 1 .37-2.14A8.4 8.4 0 0 0 8 5.5a8.5 8.5 0 0 0 2.09-.26 10.2 10.2 0 0 1 .37 2.14zm4.92 1.24a9.6 9.6 0 0 1-.37 2.14 8.5 8.5 0 0 0-4.18 0 9.7 9.7 0 0 1-.37-2.14zm.4-5A12 12 0 0 0 10 2a6.9 6.9 0 0 1 2 1 6.6 6.6 0 0 1-1.14.66zm-2.6-1.86a10 10 0 0 1 1.38 2.3A7.6 7.6 0 0 1 8 4.25a7.6 7.6 0 0 1-1.67-.19 9.8 9.8 0 0 1 1.38-2.3zm-3.15 1.9A6.6 6.6 0 0 1 4 3a6.9 6.9 0 0 1 2-1 10.4 10.4 0 0 0-.86 1.66M3 3.83a7.6 7.6 0 0 0 1.75 1 11 11 0 0 0-.43 2.54h-3A6 6 0 0 1 3 3.83M1.28 8.62h3a11 11 0 0 0 .43 2.54 7.6 7.6 0 0 0-1.75 1 6 6 0 0 1-1.68-3.54m3.86 3.72A10.4 10.4 0 0 0 6 14a6.9 6.9 0 0 1-2-1 6.6 6.6 0 0 1 1.14-.66m2.57 1.9a9.8 9.8 0 0 1-1.38-2.3 7.4 7.4 0 0 1 3.34 0 9.8 9.8 0 0 1-1.38 2.3zm3.15-1.9a6.6 6.6 0 0 1 1.19.66 7.2 7.2 0 0 1-2 1 11.5 11.5 0 0 0 .81-1.66m2.14-.17a7.6 7.6 0 0 0-1.75-1 10.8 10.8 0 0 0 .43-2.54h3A6 6 0 0 1 13 12.17"/></svg> Pesquisa na web</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Se o assistente precisa de informacao atualizada, ele pesquisa na internet em tempo real:</p>
+              <p>Se o assistente precisa de informação atualizada, ele pesquisa na internet em tempo real:</p>
               <ul>
-                <li>Busca documentacao e referencias tecnicas</li>
-                <li>Consulta solucoes e melhores praticas</li>
-                <li>Acessa e le paginas da web</li>
-                <li>Verifica versoes atuais de ferramentas</li>
+                <li>Busca documentação e referências técnicas</li>
+                <li>Consulta soluções e melhores práticas</li>
+                <li>Acessa e lê páginas da web</li>
+                <li>Verifica versões atuais de ferramentas</li>
               </ul>
             </div>
           </div>
@@ -796,17 +763,17 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F4D3; Integracao com Notion</h4>
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M14.25 1.5H1.75A1.25 1.25 0 0 0 .5 2.75v10.5a1.25 1.25 0 0 0 1.25 1.25h8.69a1.24 1.24 0 0 0 .93-.41l3.81-4.23A1.24 1.24 0 0 0 15.5 9V2.75a1.25 1.25 0 0 0-1.25-1.25M1.75 13.25V2.75h12.5v5h-3.81A1.25 1.25 0 0 0 9.19 9v4.23zm8.69 0V9h3.81z"/></svg> Integração com Notion</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
               <p>O assistente se conecta diretamente ao Notion da equipe:</p>
               <ul>
-                <li><strong>Paginas:</strong> cria, edita, duplica, move e busca paginas</li>
-                <li><strong>Bancos de dados:</strong> cria tabelas, adiciona colunas, cria visualizacoes (tabela, kanban, calendario, grafico)</li>
-                <li><strong>Comentarios:</strong> participa de discussoes nas paginas</li>
-                <li><strong>Busca:</strong> encontra conteudo em fontes conectadas (Slack, Google Drive, GitHub, Jira, Linear)</li>
+                <li><strong>Páginas:</strong> cria, edita, duplica, move e busca páginas</li>
+                <li><strong>Bancos de dados:</strong> cria tabelas, adiciona colunas, cria visualizações (tabela, kanban, calendário, gráfico)</li>
+                <li><strong>Comentários:</strong> participa de discussões nas páginas</li>
+                <li><strong>Busca:</strong> encontra conteúdo em fontes conectadas (Slack, Google Drive, GitHub, Jira, Linear)</li>
               </ul>
             </div>
           </div>
@@ -814,16 +781,16 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F9E9; Tarefas paralelas</h4>
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M14.82 2.5H1.18C.53 2.5 0 3.03 0 3.68V6.2c0 .65.53 1.18 1.18 1.18h13.64c.65 0 1.18-.53 1.18-1.18V3.68c0-.65-.53-1.18-1.18-1.18m-.07 3.62H1.25V3.75h13.5zm.07 2.5H1.18C.53 8.62 0 9.15 0 9.8v2.52c0 .65.53 1.18 1.18 1.18h13.64c.65 0 1.18-.53 1.18-1.18V9.8c0-.65-.53-1.18-1.18-1.18m-.07 3.63H1.25V9.87h13.5z"/></svg> Tarefas paralelas</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Para tarefas grandes, o assistente pode dividir o trabalho em partes menores e executar varias ao mesmo tempo:</p>
+              <p>Para tarefas grandes, o assistente pode dividir o trabalho em partes menores e executar várias ao mesmo tempo:</p>
               <ul>
                 <li>Analisa a estrutura de projetos grandes rapidamente</li>
-                <li>Pesquisas complexas em varios arquivos ao mesmo tempo</li>
-                <li>Varios sub-assistentes trabalhando em paralelo para entregar mais rapido</li>
+                <li>Pesquisas complexas em vários arquivos ao mesmo tempo</li>
+                <li>Vários sub-assistentes trabalhando em paralelo para entregar mais rápido</li>
               </ul>
             </div>
           </div>
@@ -831,17 +798,17 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F6E1;&#xFE0F; Seguranca</h4>
+            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M7.25 11.2v1.42h1.5V11.2a1.48 1.48 0 0 0 .85-1.32A1.55 1.55 0 0 0 8 8.38a1.55 1.55 0 0 0-1.6 1.5 1.48 1.48 0 0 0 .85 1.32"/><path d="M14.75 5H13.5A5.29 5.29 0 0 0 8 0a5.29 5.29 0 0 0-5.5 5H1.25A1.25 1.25 0 0 0 0 6.25v8.5A1.25 1.25 0 0 0 1.25 16h13.5A1.25 1.25 0 0 0 16 14.75v-8.5A1.25 1.25 0 0 0 14.75 5M8 1.25A4.05 4.05 0 0 1 12.25 5h-8.5A4.05 4.05 0 0 1 8 1.25m6.75 13.5H1.25v-8.5h13.5z"/></svg> Segurança</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>O assistente segue regras de seguranca rigorosas automaticamente:</p>
+              <p>O assistente segue regras de segurança rigorosas automaticamente:</p>
               <ul>
-                <li>Confere se nao ha senhas ou chaves de acesso expostas antes de publicar</li>
+                <li>Confere se não há senhas ou chaves de acesso expostas antes de publicar</li>
                 <li>Valida ferramentas antes de instalar (evita pacotes falsos ou perigosos)</li>
-                <li>Avisa antes de executar algo que nao pode ser desfeito</li>
-                <li>Detecta ambientes de producao e pede confirmacao extra</li>
+                <li>Avisa antes de executar algo que não pode ser desfeito</li>
+                <li>Detecta ambientes de produção e pede confirmação extra</li>
               </ul>
             </div>
           </div>
@@ -855,9 +822,9 @@
   <section class="section section-alt" id="comandos">
     <div class="container">
       <div class="section-header">
-        <p class="eyebrow">Referencia Rapida</p>
+        <p class="eyebrow">Referência Rápida</p>
         <h2>Comandos no Slack</h2>
-        <p>Tudo o que voce precisa digitar para interagir com o assistente.</p>
+        <p>Tudo o que você precisa digitar para interagir com o assistente.</p>
       </div>
 
       <div class="table-wrap" style="margin-bottom: 48px;">
@@ -871,23 +838,23 @@
           <tbody>
             <tr>
               <td><code>@Cursor [seu pedido]</code></td>
-              <td>Inicia o assistente com a tarefa que voce descreveu</td>
+              <td>Inicia o assistente com a tarefa que você descreveu</td>
             </tr>
             <tr>
               <td><code>@Cursor help</code></td>
-              <td>Mostra todos os comandos disponiveis</td>
+              <td>Mostra todos os comandos disponíveis</td>
             </tr>
             <tr>
               <td><code>@Cursor settings</code></td>
-              <td>Mostra e permite alterar configuracoes (projeto, modelo de IA)</td>
+              <td>Mostra e permite alterar configurações (projeto, modelo de IA)</td>
             </tr>
             <tr>
               <td><code>@Cursor list my agents</code></td>
-              <td>Lista os assistentes que estao rodando agora</td>
+              <td>Lista os assistentes que estão rodando agora</td>
             </tr>
             <tr>
               <td><code>@Cursor agent [seu pedido]</code></td>
-              <td>Cria um novo assistente na conversa (mesmo se ja existir um)</td>
+              <td>Cria um novo assistente na conversa (mesmo se já existir um)</td>
             </tr>
             <tr>
               <td><code>@Cursor summarize this thread</code></td>
@@ -898,31 +865,31 @@
       </div>
 
       <div>
-        <h3 style="margin-bottom: 16px;">Configuracao avancada</h3>
-        <p style="margin-bottom: 16px;">Voce pode escolher o projeto, a versao e o modelo de IA diretamente na mensagem:</p>
-        <div class="code-block">@Cursor [branch=dev, model=opus, repo=seu-usuario/seu-projeto] Corrija o problema na pagina de contato</div>
+        <h3 style="margin-bottom: 16px;">Configuração avançada</h3>
+        <p style="margin-bottom: 16px;">Você pode escolher o projeto, a versão e o modelo de IA diretamente na mensagem:</p>
+        <div class="code-block">@Cursor [branch=dev, model=opus, repo=seu-usuario/seu-projeto] Corrija o problema na página de contato</div>
 
         <div class="tip-box" style="margin-top: 24px;">
-          <p><strong>Dica:</strong> Use <code>@Cursor settings</code> para salvar seus padroes e nao precisar repetir essas opcoes toda vez.</p>
+          <p><strong>Dica:</strong> Use <code>@Cursor settings</code> para salvar seus padrões e não precisar repetir essas opções toda vez.</p>
         </div>
 
         <h3 style="margin-top: 48px; margin-bottom: 16px;">Exemplos de uso</h3>
         <div class="card-grid" style="grid-template-columns: 1fr;">
           <div class="card" style="padding: 24px 32px;">
             <p class="eyebrow" style="margin-bottom: 4px;">Corrigir um problema</p>
-            <div class="code-block" style="margin: 0;">@Cursor A pagina de contato nao carrega quando o campo de email esta vazio. Corrija e crie um pedido de aprovacao.</div>
+            <div class="code-block" style="margin: 0;">@Cursor A página de contato não carrega quando o campo de email está vazio. Corrija e crie um pedido de aprovação.</div>
           </div>
           <div class="card" style="padding: 24px 32px;">
-            <p class="eyebrow" style="margin-bottom: 4px;">Criar conteudo</p>
-            <div class="code-block" style="margin: 0;">@Cursor Crie uma pagina HTML com a documentacao do projeto seguindo a identidade visual do EnP</div>
+            <p class="eyebrow" style="margin-bottom: 4px;">Criar conteúdo</p>
+            <div class="code-block" style="margin: 0;">@Cursor Cria uma página com o resumo da campanha de Black Friday seguindo a identidade visual do EnP</div>
           </div>
           <div class="card" style="padding: 24px 32px;">
             <p class="eyebrow" style="margin-bottom: 4px;">Organizar arquivos</p>
-            <div class="code-block" style="margin: 0;">@Cursor Adicione descricoes em todos os arquivos da pasta de utilitarios</div>
+            <div class="code-block" style="margin: 0;">@Cursor Adicione descrições em todos os arquivos da pasta de utilitários</div>
           </div>
           <div class="card" style="padding: 24px 32px;">
             <p class="eyebrow" style="margin-bottom: 4px;">Notion</p>
-            <div class="code-block" style="margin: 0;">@Cursor Crie uma pagina no Notion com o resumo das mudancas feitas neste mes</div>
+            <div class="code-block" style="margin: 0;">@Cursor Crie uma página no Notion com o resumo das mudanças feitas neste mês</div>
           </div>
         </div>
       </div>
@@ -942,24 +909,9 @@
         <div class="guide-step">
           <div class="guide-step-num">1</div>
           <div class="guide-step-content">
-            <h3>Crie uma conta no Cursor</h3>
-            <p>
-              Acesse <a href="https://cursor.com" target="_blank" rel="noopener noreferrer">cursor.com</a> e crie sua conta.
-              O Cursor e um editor de codigo com IA embutida. Voce vai precisar de um plano que inclua
-              os assistentes na nuvem (Cloud Agents).
-            </p>
-            <div class="tip-box">
-              <p><strong>Nota:</strong> Os assistentes na nuvem estao disponiveis nos planos pagos. Confira em <a href="https://cursor.com/pricing" target="_blank" rel="noopener noreferrer">cursor.com/pricing</a>.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="guide-step">
-          <div class="guide-step-num">2</div>
-          <div class="guide-step-content">
             <h3>Conecte o Slack</h3>
             <p>
-              No painel do Cursor, va em <strong>Dashboard &rarr; Integrations &rarr; Slack</strong> e autorize o app do Cursor
+              No painel do Cursor, vá em <strong>Dashboard &rarr; Integrations &rarr; Slack</strong> e autorize o app do Cursor
               no Slack da sua equipe.
             </p>
             <p>
@@ -971,12 +923,26 @@
         </div>
 
         <div class="guide-step">
-          <div class="guide-step-num">3</div>
+          <div class="guide-step-num">2</div>
           <div class="guide-step-content">
             <h3>Conecte o GitHub</h3>
             <p>
               Ainda no Dashboard do Cursor, conecte sua conta do GitHub. O assistente precisa ter acesso
-              ao projeto onde vai trabalhar - para poder baixar os arquivos, fazer mudancas e publicar de volta.
+              ao projeto onde vai trabalhar - para poder baixar os arquivos, fazer mudanças e publicar de volta.
+            </p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="guide-step-num">3</div>
+          <div class="guide-step-content">
+            <h3>Configure seus padrões</h3>
+            <p>No Slack, digite:</p>
+            <div class="code-block">@Cursor settings</div>
+            <p>
+              Isso abre as configurações onde você define qual projeto do GitHub e qual modelo de IA
+              o assistente deve usar por padrão. Assim, você não precisa repetir essas informações
+              em cada mensagem.
             </p>
           </div>
         </div>
@@ -984,13 +950,15 @@
         <div class="guide-step">
           <div class="guide-step-num">4</div>
           <div class="guide-step-content">
-            <h3>Configure seus padroes</h3>
-            <p>No Slack, digite:</p>
-            <div class="code-block">@Cursor settings</div>
+            <h3>Ensine a identidade visual do EnP (opcional)</h3>
             <p>
-              Isso abre as configuracoes onde voce define qual projeto do GitHub e qual modelo de IA
-              o assistente deve usar por padrao. Assim, voce nao precisa repetir essas informacoes
-              em cada mensagem.
+              Se quiser que o assistente siga a identidade visual do EnP automaticamente quando criar
+              páginas ou interfaces, peça no Slack:
+            </p>
+            <div class="code-block">@Cursor Instale a skill enp-design-system a partir do repositório https://github.com/eduardogasparetto-cpu/enp-design-system - clone e copie os arquivos da pasta skill/ para .cursor/skills/enp-design-system/ e da pasta rule/ para .cursor/rules/</div>
+            <p>
+              A partir daí, toda vez que o assistente criar algo visual para o EnP, ele vai seguir
+              automaticamente as regras de cores, fontes e componentes da marca.
             </p>
           </div>
         </div>
@@ -998,29 +966,13 @@
         <div class="guide-step">
           <div class="guide-step-num">5</div>
           <div class="guide-step-content">
-            <h3>Ensine a identidade visual do EnP (opcional)</h3>
-            <p>
-              Se quiser que o assistente siga a identidade visual do EnP automaticamente quando criar
-              paginas ou interfaces, peca no Slack:
-            </p>
-            <div class="code-block">@Cursor Instale a skill enp-design-system a partir do repositorio https://github.com/eduardogasparetto-cpu/enp-design-system - clone e copie os arquivos da pasta skill/ para .cursor/skills/enp-design-system/ e da pasta rule/ para .cursor/rules/</div>
-            <p>
-              A partir dai, toda vez que o assistente criar algo visual para o EnP, ele vai seguir
-              automaticamente as regras de cores, fontes e componentes da marca.
-            </p>
-          </div>
-        </div>
-
-        <div class="guide-step">
-          <div class="guide-step-num">6</div>
-          <div class="guide-step-content">
-            <h3>Faca seu primeiro pedido</h3>
-            <p>Pronto! Agora e so mencionar <code>@Cursor</code> no Slack. Comece com algo simples:</p>
+            <h3>Faça seu primeiro pedido</h3>
+            <p>Pronto! Agora é só mencionar <code>@Cursor</code> no Slack. Comece com algo simples:</p>
             <div class="code-block">@Cursor help</div>
             <p>Depois tente algo mais completo:</p>
-            <div class="code-block">@Cursor Crie um arquivo README.md descrevendo este projeto</div>
+            <div class="code-block">@Cursor Atualiza o banner do site com o novo texto de promoção</div>
             <div class="tip-box" style="margin-top: 16px;">
-              <p><strong>Dica:</strong> O assistente le toda a conversa da thread. Se precisa dar mais contexto ou pedir ajustes, basta responder na mesma thread.</p>
+              <p><strong>Dica:</strong> O assistente lê toda a conversa da thread. Se precisa dar mais contexto ou pedir ajustes, basta responder na mesma thread.</p>
             </div>
           </div>
         </div>
@@ -1029,27 +981,31 @@
     </div>
   </section>
 
-  <!-- LIMITACOES -->
+  <!-- LIMITAÇÕES -->
   <section class="section section-alt">
     <div class="container">
       <div class="section-header">
         <p class="eyebrow">Bom saber</p>
-        <h2>Limitacoes atuais</h2>
+        <h2>Limitações atuais</h2>
       </div>
       <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
         <div class="card">
-          <h4>So GitHub</h4>
-          <p>Funciona apenas com projetos no GitHub por enquanto. Suporte a outras plataformas esta em desenvolvimento.</p>
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2.5a9.8 9.8 0 0 0-2.53.32l1 1.05A9 9 0 0 1 8 3.75 6.91 6.91 0 0 1 13.4 6a7.2 7.2 0 0 1 1.27 2 7.2 7.2 0 0 1-1.27 2c-.12.13-.24.26-.37.38l.89.89A8.24 8.24 0 0 0 16 8a8.11 8.11 0 0 0-8-5.5m5 9.56-.9-.9-6.97-6.91-1-1-1.19-1.19-.88.88 1 1A8.25 8.25 0 0 0 0 8a8.11 8.11 0 0 0 8 5.5 9.05 9.05 0 0 0 3.82-.79l1.24 1.23.88-.88-1-1zM6.66 7.54l1.67 1.67a1.5 1.5 0 0 1-.36 0A1.35 1.35 0 0 1 6.55 8a1.1 1.1 0 0 1 .11-.46M8 12.25A6.91 6.91 0 0 1 2.6 10a7.2 7.2 0 0 1-1.27-2A7.2 7.2 0 0 1 2.6 6 6.5 6.5 0 0 1 4 4.84l1.74 1.79A2.33 2.33 0 0 0 5.3 8 2.59 2.59 0 0 0 8 10.5a2.8 2.8 0 0 0 1.32-.33l1.58 1.58a8 8 0 0 1-2.9.5"/></svg></div>
+          <h4>Não ouve nem assiste</h4>
+          <p>O assistente entende texto e imagens, mas não consegue processar arquivos de áudio (MP3, WAV) nem vídeo (MP4, WebM).</p>
         </div>
         <div class="card">
-          <h4>So Slack</h4>
-          <p>A integracao via chat funciona apenas no Slack. Microsoft Teams e outros apps de mensagem ainda nao sao suportados.</p>
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5A7.77 7.77 0 0 0 0 8a7.77 7.77 0 0 0 8 7.5A7.77 7.77 0 0 0 16 8 7.77 7.77 0 0 0 8 .5M1.25 8A6 6 0 0 1 3 3.85L12.09 13A7.1 7.1 0 0 1 8 14.25 6.52 6.52 0 0 1 1.25 8M13 12.15 3.91 3A7.1 7.1 0 0 1 8 1.75 6.52 6.52 0 0 1 14.75 8 6 6 0 0 1 13 12.15"/></svg></div>
+          <h4>Não faz perguntas</h4>
+          <p>O assistente trabalha de forma autônoma. Se a instrução não for clara, ele toma a melhor decisão possível em vez de perguntar.</p>
         </div>
         <div class="card">
-          <h4>Nao faz perguntas</h4>
-          <p>O assistente trabalha de forma autonoma. Se a instrucao nao for clara, ele toma a melhor decisao possivel em vez de perguntar.</p>
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M2.67 10.73a3.52 3.52 0 0 0-.94 1.93 5 5 0 0 0-.07 1.1v.58h.8a5 5 0 0 0 .88-.08 3.46 3.46 0 0 0 1.93-.94 1.76 1.76 0 0 0-.14-2.48 1.76 1.76 0 0 0-2.46-.11m1.74 1.73a2.26 2.26 0 0 1-1.26.6h-.22v-.22a2.26 2.26 0 0 1 .6-1.26.36.36 0 0 1 .24-.08.67.67 0 0 1 .47.22.54.54 0 0 1 .17.74M14.65 2.24a.91.91 0 0 0-.89-.89A8.75 8.75 0 0 0 7.27 3.5L5.64 5.4l-2.4-.5a1 1 0 0 0-.92.27l-.68.68a1 1 0 0 0-.28.81 1 1 0 0 0 .45.74l2.06 1.32.13.08 3.2 3.25.08.08 1.32 2.06a1 1 0 0 0 .74.45h.11a1 1 0 0 0 .7-.29l.68-.68a1 1 0 0 0 .27-.92l-.5-2.39 1.84-1.58a8.8 8.8 0 0 0 2.21-6.54M3.11 6.15l1.32.28-.64.75-1-.67zm6.38 7.1-.67-1 .75-.64.28 1.32zm2.39-5.11.18.17zm-.28-.28L7.92 11 5 8.08 8.14 4.4a7.44 7.44 0 0 1 5.26-1.8 7.48 7.48 0 0 1-1.8 5.26"/><path d="M11.13 6.63a1.19 1.19 0 0 0-.06-1.7 1.16 1.16 0 1 0-1.64 1.63 1.2 1.2 0 0 0 1.7.07"/></svg></div>
+          <h4>Um projeto por vez</h4>
+          <p>Cada pedido roda num ambiente isolado na nuvem. Para trabalhar em mais de um projeto ao mesmo tempo, é preciso enviar pedidos separados.</p>
         </div>
         <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .5A7.77 7.77 0 0 0 0 8a7.77 7.77 0 0 0 8 7.5A7.77 7.77 0 0 0 16 8 7.77 7.77 0 0 0 8 .5m0 13.75A6.52 6.52 0 0 1 1.25 8 6.52 6.52 0 0 1 8 1.75 6.52 6.52 0 0 1 14.75 8 6.52 6.52 0 0 1 8 14.25"/><path d="M8.63 4.25H7.38v4.38H11V7.38H8.63z"/></svg></div>
           <h4>Limite de tempo</h4>
           <p>Cada comando que ele executa tem limite de 10 minutos. Tarefas muito longas precisam ser divididas em partes menores.</p>
         </div>
@@ -1057,49 +1013,11 @@
     </div>
   </section>
 
-  <!-- PAGE LINK BANNER -->
-  <section class="page-link-banner" id="link-da-pagina">
-    <div class="container">
-      <h2>Link desta pagina</h2>
-      <p>Compartilhe esta documentacao com o time.</p>
-      <a href="https://eduardogasparetto-cpu.github.io/curslack/" class="btn btn-primary btn-large" id="pageLink">
-        eduardogasparetto-cpu.github.io/curslack
-      </a>
-    </div>
-  </section>
-
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <img src="https://marca.ecommercenapratica.com/images/logos/logo-branco-ecommerce-na-pratica.svg" alt="Ecommerce na Prática" width="180" height="32">
-          <p>A integracao Slack + Cursor e uma ferramenta interna do time do Ecommerce na Pratica. Conecta o Cursor AI ao Slack para automatizar tarefas de tecnologia.</p>
-        </div>
-        <div>
-          <h4>Navegacao</h4>
-          <ul class="footer-links">
-            <li><a href="#fazendo-historia">Fazendo historia</a></li>
-            <li><a href="#o-que-e">O que e</a></li>
-            <li><a href="#como-funciona">Como funciona</a></li>
-            <li><a href="#capacidades">Capacidades</a></li>
-            <li><a href="#comandos">Comandos</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Links Uteis</h4>
-          <ul class="footer-links">
-            <li><a href="https://cursor.com" target="_blank" rel="noopener noreferrer">Cursor</a></li>
-            <li><a href="https://cursor.com/docs/integrations/slack" target="_blank" rel="noopener noreferrer">Cursor + Slack</a></li>
-            <li><a href="https://github.com/eduardogasparetto-cpu/curslack" target="_blank" rel="noopener noreferrer">Este projeto no GitHub</a></li>
-            <li><a href="https://github.com/eduardogasparetto-cpu/enp-design-system" target="_blank" rel="noopener noreferrer">Identidade Visual EnP</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>Ecommerce na Pratica &copy; 2026. Pagina criada automaticamente por Cursor Cloud Agent.</p>
-        <a href="#link-da-pagina">eduardogasparetto-cpu.github.io/curslack</a>
-      </div>
+      <img src="https://marca.ecommercenapratica.com/images/logos/logo-branco-ecommerce-na-pratica.svg" alt="Ecommerce na Prática" width="180" height="32">
+      <p>Ecommerce na Prática &copy; 2026. Página criada automaticamente por Cursor Cloud Agent.</p>
     </div>
   </footer>
 
