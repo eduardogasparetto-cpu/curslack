@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CurSlack — Cursor Agent via Slack | Ecommerce na Prática</title>
+  <meta name="description" content="Documentação completa do CurSlack: como o time EnP usa um agente de IA direto no Slack para automatizar tarefas de engenharia de software.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap">
+  <style>
+    :root {
+      --bg-page: #F4F7FB;
+      --bg-card: #FFFFFF;
+      --bg-card-inner: #F4F7FB;
+      --text-heading: #313642;
+      --text-body: #5C6167;
+      --text-body-strong: #313642;
+      --text-meta: #979BA1;
+      --accent: #1076DD;
+      --accent-hover: #FFFFFF;
+      --accent-active: #0A5BB5;
+      --link: #1076DD;
+      --link-hover: #313642;
+      --divider: #BDC0C6;
+      --input-border: #BDC0C6;
+      --input-focus: #1076DD;
+      --sky-blue: #31B3F9;
+      --lime: #CDFF07;
+      --nature-green: #00CD4B;
+      --dawn-orange: #FF7A27;
+      --gray-10: #EFF1F4;
+      --gray-20: #BDC0C6;
+      --gray-40: #979BA1;
+      --gray-60: #5C6167;
+      --gray-80: #303339;
+      --midnight: #0D1B2E;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Helvetica Neue", arial, sans-serif;
+      font-weight: 400;
+      color: var(--text-body);
+      background-color: var(--bg-page);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { color: var(--text-heading); font-weight: 600; }
+    h1 { font-size: clamp(36px, 5vw, 58px); letter-spacing: -0.025em; line-height: 1.05; }
+    h2 { font-size: clamp(32px, 4vw, 42px); letter-spacing: -0.025em; line-height: 1.1; }
+    h3 { font-size: clamp(24px, 3vw, 30px); letter-spacing: -0.02em; line-height: 1.2; }
+    h4 { font-size: clamp(20px, 2.5vw, 22px); letter-spacing: -0.01em; line-height: 1.3; }
+
+    a { color: var(--link); text-decoration: none; transition: color 0.15s ease-in-out; }
+    a:hover { color: var(--link-hover); }
+
+    .container {
+      width: 100%;
+      max-width: 1248px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      background: rgba(244, 247, 251, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-10);
+      padding: 16px 0;
+    }
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-heading);
+      letter-spacing: 0;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-heading);
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 120px 0 80px;
+      background: linear-gradient(180deg, #1076DD 0%, #5BA8EF 50%, #F4F7FB 100%);
+      text-align: center;
+    }
+    .hero h1 { color: #FFFFFF; margin-bottom: 32px; }
+    .hero-lead {
+      font-size: clamp(16px, 2vw, 18px);
+      color: rgba(255,255,255,0.9);
+      max-width: 736px;
+      margin: 0 auto 32px;
+      line-height: 1.5;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(5px);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 32px;
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 120px 0; }
+    .section-alt { background: var(--bg-card); }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header h2 { margin-bottom: 16px; }
+    .section-header p { font-size: 18px; max-width: 736px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--text-body);
+      margin-bottom: 8px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 40px 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -12px rgba(50, 50, 93, 0.1), 0 18px 36px -18px rgba(0, 0, 0, 0.1);
+    }
+    .card h3 { margin-bottom: 8px; }
+    .card h4 { margin-bottom: 8px; }
+    .card p { margin-bottom: 0; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 24px;
+      background: var(--bg-card-inner);
+    }
+
+    /* ── STEPS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+      counter-reset: step;
+    }
+    .step {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 40px 24px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      counter-increment: step;
+      position: relative;
+    }
+    .step::before {
+      content: counter(step);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 100px;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 22px;
+      margin: 0 auto 16px;
+    }
+    .step h4 { margin-bottom: 8px; }
+
+    /* ── COMMANDS TABLE ── */
+    .table-wrap {
+      border-radius: 16px;
+      overflow-x: auto;
+      border: 1px solid rgba(49,54,66,0.10);
+      background: var(--bg-card);
+    }
+    .table-wrap table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+    .table-wrap thead tr { background: rgba(49,54,66,0.07); }
+    .table-wrap th {
+      text-align: left;
+      padding: 14px 20px;
+      font-weight: 600;
+      color: var(--gray-60);
+      border-bottom: 1px solid rgba(49,54,66,0.10);
+      font-size: 16px;
+    }
+    .table-wrap td {
+      padding: 14px 20px;
+      color: var(--text-heading);
+      border-bottom: 1px solid rgba(49,54,66,0.06);
+    }
+    .table-wrap tr:last-child td { border-bottom: none; }
+    .table-wrap tr:nth-child(even) { background: rgba(49,54,66,0.03); }
+    .table-wrap code {
+      background: rgba(49,54,66,0.05);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      color: var(--text-heading);
+    }
+
+    /* ── CODE BLOCKS ── */
+    .code-block {
+      background: rgba(49,54,66,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      overflow-x: auto;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-heading);
+      margin: 16px 0;
+    }
+
+    /* ── ACCORDION / FAQ ── */
+    .accordion { max-width: 992px; margin: 0 auto; }
+    .accordion-item {
+      background: var(--bg-card);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 32px;
+      cursor: pointer;
+      gap: 16px;
+      user-select: none;
+    }
+    .accordion-header h4 { flex: 1; margin: 0; }
+    .accordion-toggle {
+      width: 32px;
+      height: 32px;
+      border-radius: 100px;
+      background: var(--bg-card-inner);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .accordion-item.open .accordion-toggle { transform: rotate(45deg); }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .accordion-body-inner { padding: 0 32px 24px; }
+    .accordion-body-inner p { margin-bottom: 8px; }
+    .accordion-body-inner ul { padding-left: 24px; margin-bottom: 8px; }
+    .accordion-body-inner li { margin-bottom: 4px; }
+    .accordion-body-inner li::marker { color: var(--accent); }
+
+    /* ── GUIDE STEPS ── */
+    .guide-steps { max-width: 992px; margin: 0 auto; }
+    .guide-step {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 48px;
+      align-items: flex-start;
+    }
+    .guide-step-num {
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      border-radius: 100px;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 22px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .guide-step-content { flex: 1; }
+    .guide-step-content h3 { margin-bottom: 8px; }
+    .guide-step-content p { margin-bottom: 16px; }
+    .guide-step-content .code-block { margin-top: 8px; }
+
+    /* ── TIP BOX ── */
+    .tip-box {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 16px 16px 0;
+      padding: 24px 32px;
+      margin: 24px 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    .tip-box strong { color: var(--text-heading); }
+
+    /* ── BUILD STORY ── */
+    .build-story {
+      max-width: 992px;
+      margin: 0 auto;
+    }
+    .build-story p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .build-story h3 { margin-top: 48px; margin-bottom: 16px; }
+    .build-story ul { padding-left: 24px; margin-bottom: 16px; }
+    .build-story li {
+      margin-bottom: 8px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .build-story li::marker { color: var(--accent); }
+
+    /* ── BUTTONS ── */
+    .btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 100px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all ease-in-out 0.15s;
+      outline: none;
+      text-decoration: none;
+      min-height: 44px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+    .btn-primary:hover {
+      background: #FFFFFF;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .btn-primary:active {
+      background: var(--accent-active);
+      color: #FFFFFF;
+      transform: scale(0.98);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+    .btn-large { padding: 16px 32px; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--midnight);
+      color: var(--gray-20);
+      padding: 80px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img { height: 32px; margin-bottom: 16px; }
+    .footer-brand p { font-size: 14px; color: var(--gray-40); line-height: 1.6; }
+    .footer h4 { color: #FFFFFF; font-size: 14px; margin-bottom: 16px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a { color: var(--gray-20); font-size: 14px; }
+    .footer-links a:hover { color: #FFFFFF; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-bottom p { font-size: 12px; color: var(--gray-40); }
+    .footer-bottom a { color: var(--sky-blue); font-size: 12px; }
+    .footer-bottom a:hover { color: #FFFFFF; }
+
+    /* ── PAGE LINK BANNER ── */
+    .page-link-banner {
+      background: linear-gradient(135deg, #1076DD 0%, #31B3F9 100%);
+      padding: 80px 0;
+      text-align: center;
+    }
+    .page-link-banner h2 { color: #FFFFFF; margin-bottom: 16px; }
+    .page-link-banner p { color: rgba(255,255,255,0.9); font-size: 18px; margin-bottom: 32px; }
+    .page-link-banner .btn-primary {
+      background: #FFFFFF;
+      color: var(--accent);
+      font-size: 16px;
+      padding: 16px 32px;
+    }
+    .page-link-banner .btn-primary:hover {
+      background: var(--midnight);
+      color: #FFFFFF;
+      border-color: transparent;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .section { padding: 60px 0; }
+      .hero { padding: 80px 0 60px; }
+
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        padding: 24px;
+        gap: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        z-index: 1030;
+      }
+      .nav-toggle { display: block; }
+
+      .card-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      .guide-step { flex-direction: column; }
+      .guide-step-num { width: 48px; height: 48px; min-width: 48px; }
+
+      .accordion-header { padding: 16px 24px; }
+      .accordion-body-inner { padding: 0 24px 16px; }
+
+      .card { padding: 32px 24px; }
+
+      .table-wrap { font-size: 14px; }
+      .table-wrap th, .table-wrap td { padding: 12px 16px; }
+
+      .hero-badges { flex-direction: column; align-items: center; }
+
+      .page-link-banner { padding: 60px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .steps { grid-template-columns: 1fr; }
+      .section-header { margin-bottom: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <img src="https://marca.ecommercenapratica.com/images/logos/logo-colorido-ecommerce-na-pratica.svg" alt="Ecommerce na Prática" width="200" height="36">
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menu" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#o-que-e">O que é</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#capacidades">Capacidades</a>
+        <a href="#comandos">Comandos</a>
+        <a href="#como-foi-construida">Como foi feita</a>
+        <a href="#replicar">Replicar</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow" style="color: rgba(255,255,255,0.8);">Cursor Agent + Slack + GitHub</p>
+      <h1>CurSlack</h1>
+      <p class="hero-lead">
+        Um agente de inteligência artificial que o time do Ecommerce na Prática usa direto no Slack
+        para automatizar tarefas de programação, criar documentos e gerenciar código — sem precisar
+        abrir nenhum programa no computador.
+      </p>
+      <div class="hero-badges">
+        <span class="badge">&#x1F916; IA Autônoma</span>
+        <span class="badge">&#x1F4AC; Direto no Slack</span>
+        <span class="badge">&#x2601;&#xFE0F; Roda na Nuvem</span>
+        <span class="badge">&#x1F517; Conectado ao GitHub</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE É -->
+  <section class="section" id="o-que-e">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">Visão Geral</p>
+        <h2>O que é o CurSlack?</h2>
+        <p>
+          É a conexão entre três ferramentas: o <strong>Cursor</strong> (um editor de código com IA),
+          o <strong>Slack</strong> (nosso chat de equipe) e o <strong>GitHub</strong> (onde guardamos nosso código).
+          Juntos, eles criam um assistente que qualquer pessoa do time pode usar para pedir tarefas
+          de tecnologia — tudo por mensagem de texto.
+        </p>
+      </div>
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+        <div class="card">
+          <div class="card-icon">&#x1F4BB;</div>
+          <h4>Sem precisar de computador ligado</h4>
+          <p>O agente roda em uma máquina virtual isolada na nuvem. Você manda a mensagem e pode ir tomar um café.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#x1F4AC;</div>
+          <h4>Conversa natural</h4>
+          <p>Você escreve no Slack como se estivesse pedindo algo para um colega. O agente entende e executa.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#x1F512;</div>
+          <h4>Seguro por padrão</h4>
+          <p>Verifica se não há senhas expostas, valida pacotes antes de instalar e pede confirmação antes de ações destrutivas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="section section-alt" id="como-funciona">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">Passo a Passo</p>
+        <h2>Como funciona?</h2>
+        <p>De uma mensagem no Slack até um Pull Request pronto — em cinco etapas automáticas.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h4>Você pede</h4>
+          <p>Menciona <code>@Cursor</code> no Slack com o que precisa.</p>
+        </div>
+        <div class="step">
+          <h4>Agente inicia</h4>
+          <p>Um Cloud Agent é criado em uma máquina isolada na nuvem.</p>
+        </div>
+        <div class="step">
+          <h4>Analisa o código</h4>
+          <p>Clona o repositório, lê os arquivos e entende a estrutura.</p>
+        </div>
+        <div class="step">
+          <h4>Faz as mudanças</h4>
+          <p>Edita, cria ou remove arquivos conforme necessário.</p>
+        </div>
+        <div class="step">
+          <h4>Entrega o resultado</h4>
+          <p>Faz commit, push e cria um Pull Request no GitHub.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPACIDADES -->
+  <section class="section" id="capacidades">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">Tudo que o agente sabe fazer</p>
+        <h2>Capacidades Completas</h2>
+        <p>O agente tem acesso a ferramentas poderosas que permitem executar praticamente qualquer tarefa de engenharia de software.</p>
+      </div>
+      <div class="accordion" id="capabilities">
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4>&#x1F4DD; Leitura e Edição de Código</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>O agente consegue abrir, ler, criar, editar e apagar qualquer arquivo do projeto. Funciona com todas as linguagens de programação — Python, JavaScript, TypeScript, PHP, Java, Go, entre muitas outras.</p>
+              <ul>
+                <li>Lê arquivos de texto, imagens (JPEG, PNG, GIF) e até PDFs</li>
+                <li>Edita trechos específicos de código sem alterar o restante do arquivo</li>
+                <li>Cria novos arquivos quando necessário</li>
+                <li>Remove arquivos obsoletos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4>&#x1F50D; Busca Inteligente</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Duas ferramentas de busca ajudam o agente a navegar em qualquer tamanho de projeto rapidamente:</p>
+              <ul>
+                <li><strong>Busca por nome de arquivo</strong> — encontra arquivos por padrão (ex: "todos os arquivos .tsx na pasta de componentes")</li>
+                <li><strong>Busca por conteúdo</strong> — encontra trechos específicos de texto ou código dentro dos arquivos, com filtros por tipo e contexto</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4>&#x1F5A5;&#xFE0F; Terminal e Linha de Comando</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>O agente tem acesso a um terminal completo, como se fosse um desenvolvedor abrindo a linha de comando do computador:</p>
+              <ul>
+                <li>Instala bibliotecas e dependências do projeto</li>
+                <li>Roda testes automatizados para verificar se nada quebrou</li>
+                <li>Compila e builda projetos</li>
+                <li>Inicia servidores de desenvolvimento</li>
+                <li>Cada comando pode rodar por até 10 minutos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4>&#x1F500; Git e Controle de Versão</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Git é o sistema que registra todas as mudanças feitas no código — como um "histórico de versões" do projeto. O agente gerencia isso automaticamente:</p>
+              <ul>
+                <li>Salva as alterações (commit) com mensagens claras explicando o que mudou</li>
+                <li>Envia as alterações para o repositório na nuvem (push)</li>
+                <li>Verifica se não há senhas ou dados sensíveis no código antes de enviar</li>
+                <li>Cria e gerencia ramificações (branches) do projeto</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4>&#x1F4CB; Pull Requests no GitHub</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Pull Requests (PRs) são pedidos de revisão — quando o agente termina uma tarefa, ele cria um PR para que alguém da equipe aprove antes de publicar:</p>
+              <ul>
+                <li>Cria PRs com título e descrição detalhados</li>
+                <li>Atualiza PRs existentes conforme necessário</li>
+                <li>Cria como rascunho (draft) por padrão, para revisão humana</li>
+                <li>Consulta status de testes automáticos (CI/CD)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4>&#x1F310; Pesquisa na Web</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Precisa de informação atualizada? O agente pesquisa na internet em tempo real:</p>
+              <ul>
+                <li>Busca documentação de bibliotecas e frameworks</li>
+                <li>Consulta melhores práticas e soluções atuais</li>
+                <li>Acessa e lê páginas web específicas (transforma em texto legível)</li>
+                <li>Verifica versões atuais de pacotes e APIs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4>&#x1F4D3; Integração com Notion</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>O agente se conecta diretamente ao workspace do Notion da equipe:</p>
+              <ul>
+                <li><strong>Páginas:</strong> cria, edita, duplica, move e busca páginas</li>
+                <li><strong>Bancos de dados:</strong> cria tabelas, adiciona e modifica colunas, cria diferentes visualizações (tabela, kanban, calendário, gráfico)</li>
+                <li><strong>Comentários:</strong> participa de discussões em páginas do Notion</li>
+                <li><strong>Busca semântica:</strong> encontra conteúdo em fontes conectadas (Slack, Google Drive, GitHub, Jira, Linear)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4>&#x1F9E9; Sub-Agentes e Tarefas Paralelas</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Para tarefas complexas, o agente pode delegar partes do trabalho para sub-agentes especializados:</p>
+              <ul>
+                <li><strong>Agente de Exploração:</strong> analisa a estrutura de projetos grandes rapidamente</li>
+                <li><strong>Agente de Propósito Geral:</strong> pesquisas complexas e tarefas com múltiplos passos</li>
+                <li><strong>Execução paralela:</strong> vários sub-agentes trabalhando ao mesmo tempo para entregar mais rápido</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h4>&#x1F6E1;&#xFE0F; Segurança Integrada</h4>
+            <span class="accordion-toggle">+</span>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Segurança não é opcional — o agente segue regras rigorosas automaticamente:</p>
+              <ul>
+                <li>Verifica se não há senhas, chaves de API ou tokens expostos antes de cada commit</li>
+                <li>Valida pacotes antes de instalar (evita pacotes maliciosos ou falsos)</li>
+                <li>Alerta antes de executar comandos destrutivos</li>
+                <li>Detecta ambientes de produção e pede confirmação extra</li>
+                <li>Análise de segurança estática do código gerado (SAST via Snyk)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMANDOS NO SLACK -->
+  <section class="section section-alt" id="comandos">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">Referência Rápida</p>
+        <h2>Comandos no Slack</h2>
+        <p>Tudo o que você precisa digitar para interagir com o agente.</p>
+      </div>
+
+      <div class="table-wrap" style="margin-bottom: 48px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Comando</th>
+              <th>O que faz</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@Cursor [instrução]</code></td>
+              <td>Inicia um agente com a tarefa que você descreveu</td>
+            </tr>
+            <tr>
+              <td><code>@Cursor help</code></td>
+              <td>Mostra todos os comandos disponíveis</td>
+            </tr>
+            <tr>
+              <td><code>@Cursor settings</code></td>
+              <td>Exibe e permite alterar configurações (modelo, repositório, branch)</td>
+            </tr>
+            <tr>
+              <td><code>@Cursor list my agents</code></td>
+              <td>Lista os agentes que estão rodando agora</td>
+            </tr>
+            <tr>
+              <td><code>@Cursor agent [instrução]</code></td>
+              <td>Cria um novo agente na thread (mesmo se já existir um)</td>
+            </tr>
+            <tr>
+              <td><code>@Cursor summarize this thread</code></td>
+              <td>Resume toda a conversa da thread atual</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="max-width: 992px; margin: 0 auto;">
+        <h3 style="margin-bottom: 16px;">Configuração avançada (inline)</h3>
+        <p style="margin-bottom: 16px;">Você pode especificar o repositório, a branch e o modelo diretamente na mensagem:</p>
+        <div class="code-block">@Cursor [branch=dev, model=opus, repo=seu-usuario/seu-repo] Corrija o bug de login</div>
+
+        <div class="tip-box" style="margin-top: 24px;">
+          <p><strong>Dica:</strong> Use <code>@Cursor settings</code> para definir seus padrões e evitar repetir esses parâmetros em toda mensagem.</p>
+        </div>
+
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">Exemplos práticos</h3>
+        <div class="card-grid" style="grid-template-columns: 1fr;">
+          <div class="card" style="padding: 24px 32px;">
+            <p class="eyebrow" style="margin-bottom: 4px;">Correção de bug</p>
+            <div class="code-block" style="margin: 0;">@Cursor O endpoint /api/users retorna 500 quando o email é vazio. Corrija e crie um PR.</div>
+          </div>
+          <div class="card" style="padding: 24px 32px;">
+            <p class="eyebrow" style="margin-bottom: 4px;">Refatoração</p>
+            <div class="code-block" style="margin: 0;">@Cursor Refatore os componentes React de classe para funcionais com hooks em src/components/</div>
+          </div>
+          <div class="card" style="padding: 24px 32px;">
+            <p class="eyebrow" style="margin-bottom: 4px;">Documentação</p>
+            <div class="code-block" style="margin: 0;">@Cursor Adicione JSDoc a todas as funções exportadas em src/utils/</div>
+          </div>
+          <div class="card" style="padding: 24px 32px;">
+            <p class="eyebrow" style="margin-bottom: 4px;">Criação de feature</p>
+            <div class="code-block" style="margin: 0;">@Cursor [branch=feature/dark-mode] Implemente dark mode. Adicione toggle no header e use CSS variables.</div>
+          </div>
+          <div class="card" style="padding: 24px 32px;">
+            <p class="eyebrow" style="margin-bottom: 4px;">Notion</p>
+            <div class="code-block" style="margin: 0;">@Cursor Crie uma página no Notion com o resumo das alterações do último sprint</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FOI CONSTRUÍDA -->
+  <section class="section" id="como-foi-construida">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">Por trás da página</p>
+        <h2>Como esta página foi construída</h2>
+        <p>Tudo o que você está vendo aqui foi feito por um agente de IA, sem ninguém abrir um editor de código.</p>
+      </div>
+      <div class="build-story">
+        <p>
+          Essa página nasceu de uma conversa no Slack. O Edo (Eduardo Gasparetto) abriu o Slack,
+          mencionou <code>@Cursor</code> e pediu para o agente criar um README para este repositório.
+          O agente fez isso automaticamente: criou o arquivo, escreveu toda a documentação e abriu
+          um Pull Request no GitHub como rascunho.
+        </p>
+        <p>
+          Depois, veio uma segunda instrução — também via Slack — pedindo para transformar esse README
+          em uma página HTML bonita, seguindo o <strong>Design System oficial do Ecommerce na Prática</strong>.
+          O agente então:
+        </p>
+        <ul>
+          <li>Instalou a <strong>skill do Design System EnP</strong> a partir do repositório no GitHub</li>
+          <li>Leu todas as regras de cores, tipografia, espaçamento, botões e componentes</li>
+          <li>Escolheu o modo <strong>Institucional Claro</strong> (fundo cinza claro #F4F7FB, textos escuros, botões azuis)</li>
+          <li>Usou o logo oficial do EnP direto da URL <code>marca.ecommercenapratica.com</code></li>
+          <li>Criou o arquivo <code>index.html</code> com todo o CSS e JS embutidos no mesmo arquivo</li>
+          <li>Aplicou a fonte <strong>Plus Jakarta Sans</strong> nos pesos 400 (normal) e 600 (negrito)</li>
+          <li>Usou espaçamentos em múltiplos de 4px, como define o Design System</li>
+          <li>Garantiu que a página funciona bem no celular (design responsivo)</li>
+        </ul>
+
+        <h3>O que é o Design System EnP?</h3>
+        <p>
+          Um Design System é como um "manual de identidade visual para código". Ele define exatamente
+          quais cores, fontes, tamanhos, espaçamentos e componentes devem ser usados em tudo que o
+          Ecommerce na Prática constrói digitalmente. É baseado nas diretrizes da Nuvemshop, mas
+          adaptado com a identidade própria do EnP.
+        </p>
+        <p>
+          A "skill" do Design System é um pacote de arquivos que ensina ao Cursor todas essas regras.
+          Quando a skill está instalada, toda vez que o agente precisa criar algo visual para o EnP,
+          ele automaticamente consulta essas regras e as aplica — sem que ninguém precise explicar
+          de novo quais cores ou fontes usar.
+        </p>
+
+        <h3>Três estilos disponíveis</h3>
+        <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin-top: 16px;">
+          <div class="card" style="background: #F4F7FB; border: 2px solid var(--accent);">
+            <h4 style="color: #313642;">Institucional Claro</h4>
+            <p style="color: #5C6167;">Fundo Frost #F4F7FB, textos escuros, CTA azul #1076DD. Usado nesta página, no site, blog e escola.</p>
+          </div>
+          <div class="card" style="background: #212328;">
+            <h4 style="color: #FFFFFF;">Escuro Institucional</h4>
+            <p style="color: #BDC0C6;">Fundo #212328, textos claros, CTA azul celeste #31B3F9. Para versões escuras do site.</p>
+          </div>
+          <div class="card" style="background: #0D1B2E;">
+            <h4 style="color: #FFFFFF;">Serviços</h4>
+            <p style="color: #BDC0C6;">Fundo Midnight #0D1B2E, textos claros, CTA lima #CDFF07. Para páginas de consultoria e planos.</p>
+          </div>
+        </div>
+
+        <div class="tip-box" style="margin-top: 32px;">
+          <p><strong>Aprendizado importante:</strong> sempre passe a URL exata do logo no prompt. Sem isso, o agente pode usar um placeholder genérico em vez do logo real da marca.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO REPLICAR -->
+  <section class="section section-alt" id="replicar">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">Tutorial</p>
+        <h2>Como replicar esta configuração</h2>
+        <p>Siga este passo a passo para ter o mesmo ambiente funcionando: Cursor + Slack + agente de IA conectado ao seu repositório.</p>
+      </div>
+      <div class="guide-steps">
+
+        <div class="guide-step">
+          <div class="guide-step-num">1</div>
+          <div class="guide-step-content">
+            <h3>Crie uma conta no Cursor</h3>
+            <p>
+              Acesse <a href="https://cursor.com" target="_blank" rel="noopener noreferrer">cursor.com</a> e crie sua conta.
+              O Cursor é um editor de código com IA integrada. Você vai precisar de um plano que inclua
+              <strong>Cloud Agents</strong> (agentes na nuvem).
+            </p>
+            <div class="tip-box">
+              <p><strong>Nota:</strong> Cloud Agents estão disponíveis nos planos pagos. Confira os planos em <a href="https://cursor.com/pricing" target="_blank" rel="noopener noreferrer">cursor.com/pricing</a>.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="guide-step-num">2</div>
+          <div class="guide-step-content">
+            <h3>Conecte o Slack</h3>
+            <p>
+              No painel do Cursor, vá em <strong>Dashboard → Integrations → Slack</strong> e autorize o app do Cursor
+              no workspace do Slack da sua equipe.
+            </p>
+            <p>
+              Após a instalação, o bot <code>@Cursor</code> aparecerá nos canais do Slack.
+              Recomendamos criar um canal dedicado como <code>#dev-bot</code> para manter as automações
+              separadas das conversas regulares.
+            </p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="guide-step-num">3</div>
+          <div class="guide-step-content">
+            <h3>Conecte o GitHub</h3>
+            <p>
+              Ainda no Dashboard do Cursor, conecte sua conta do GitHub. O agente precisa de acesso
+              ao repositório onde vai trabalhar. Certifique-se de que as permissões estão corretas
+              para que ele possa criar branches e Pull Requests.
+            </p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="guide-step-num">4</div>
+          <div class="guide-step-content">
+            <h3>Configure seus padrões</h3>
+            <p>No Slack, digite o seguinte comando para definir seu repositório e modelo padrão:</p>
+            <div class="code-block">@Cursor settings</div>
+            <p>
+              Isso abre as configurações onde você pode definir qual repositório do GitHub, qual branch
+              e qual modelo de IA o agente deve usar por padrão. Assim, você não precisa repetir essas
+              informações em cada mensagem.
+            </p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="guide-step-num">5</div>
+          <div class="guide-step-content">
+            <h3>Instale o Design System EnP (opcional)</h3>
+            <p>
+              Se quiser que o agente siga a identidade visual do EnP automaticamente, instale a skill
+              do Design System. No Slack, envie:
+            </p>
+            <div class="code-block">@Cursor Instale a skill enp-design-system a partir do repositório https://github.com/eduardogasparetto-cpu/enp-design-system — clone e copie os arquivos da pasta skill/ para .cursor/skills/enp-design-system/ e da pasta rule/ para .cursor/rules/</div>
+            <p>
+              A partir de agora, toda vez que o agente precisar criar algo visual para o EnP, ele
+              vai consultar automaticamente as regras de cores, fontes e componentes.
+            </p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="guide-step-num">6</div>
+          <div class="guide-step-content">
+            <h3>Faça seu primeiro pedido</h3>
+            <p>Pronto! Agora é só mencionar o <code>@Cursor</code> no Slack com uma instrução. Comece com algo simples para testar:</p>
+            <div class="code-block">@Cursor help</div>
+            <p>Depois tente algo mais elaborado:</p>
+            <div class="code-block">@Cursor Crie um arquivo README.md para este repositório descrevendo o projeto</div>
+            <div class="tip-box" style="margin-top: 16px;">
+              <p><strong>Dica:</strong> O agente lê toda a thread do Slack. Se precisa dar mais contexto ou refinar a instrução, basta responder na mesma thread.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LIMITAÇÕES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">Bom saber</p>
+        <h2>Limitações atuais</h2>
+      </div>
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+        <div class="card">
+          <h4>GitHub apenas</h4>
+          <p>Atualmente funciona somente com repositórios no GitHub. Suporte ao GitLab está em desenvolvimento.</p>
+        </div>
+        <div class="card">
+          <h4>Slack apenas</h4>
+          <p>A integração via chat funciona apenas no Slack. Microsoft Teams e outras plataformas ainda não são suportadas.</p>
+        </div>
+        <div class="card">
+          <h4>Sem perguntas durante a execução</h4>
+          <p>O agente opera de forma autônoma. Se a instrução for ambígua, ele toma a melhor decisão possível sem perguntar.</p>
+        </div>
+        <div class="card">
+          <h4>Limite de tempo</h4>
+          <p>Cada comando de terminal tem limite máximo de 10 minutos. Tarefas muito longas precisam ser divididas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE LINK BANNER -->
+  <section class="page-link-banner" id="link-da-pagina">
+    <div class="container">
+      <h2>Link desta página</h2>
+      <p>Compartilhe esta documentação com o time.</p>
+      <a href="https://eduardogasparetto-cpu.github.io/curslack/" class="btn btn-primary btn-large" id="pageLink">
+        eduardogasparetto-cpu.github.io/curslack
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="https://marca.ecommercenapratica.com/images/logos/logo-branco-ecommerce-na-pratica.svg" alt="Ecommerce na Prática" width="180" height="32">
+          <p>CurSlack é uma ferramenta interna do time de tecnologia do Ecommerce na Prática, conectando Cursor AI ao Slack para automatizar tarefas de engenharia.</p>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <ul class="footer-links">
+            <li><a href="#o-que-e">O que é</a></li>
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#capacidades">Capacidades</a></li>
+            <li><a href="#comandos">Comandos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Links Úteis</h4>
+          <ul class="footer-links">
+            <li><a href="https://cursor.com/docs/cloud-agent/capabilities" target="_blank" rel="noopener noreferrer">Cursor Cloud Agents</a></li>
+            <li><a href="https://cursor.com/docs/integrations/slack" target="_blank" rel="noopener noreferrer">Cursor + Slack</a></li>
+            <li><a href="https://github.com/eduardogasparetto-cpu/curslack" target="_blank" rel="noopener noreferrer">Repositório no GitHub</a></li>
+            <li><a href="https://github.com/eduardogasparetto-cpu/enp-design-system" target="_blank" rel="noopener noreferrer">Design System EnP</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Ecommerce na Prática &copy; 2026. Página gerada automaticamente por Cursor Cloud Agent.</p>
+        <a href="#link-da-pagina">eduardogasparetto-cpu.github.io/curslack</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+
+    document.querySelectorAll('.accordion-header').forEach(function(header) {
+      header.addEventListener('click', function() {
+        var item = this.parentElement;
+        var body = item.querySelector('.accordion-body');
+        var isOpen = item.classList.contains('open');
+
+        if (isOpen) {
+          body.style.maxHeight = null;
+          item.classList.remove('open');
+        } else {
+          body.style.maxHeight = body.scrollHeight + 'px';
+          item.classList.add('open');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
