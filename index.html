@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<!-- Página gerada por Cursor Cloud Agent — deploy: 2026-04-05 -->
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CurSlack — Cursor Agent via Slack | Ecommerce na Prática</title>
-  <meta name="description" content="Documentação completa do CurSlack: como o time EnP usa um agente de IA direto no Slack para automatizar tarefas de engenharia de software.">
+  <meta name="description" content="Documentação completa do CurSlack: como o time EnP usa um agente de IA direto no Slack para automatizar tarefas de tecnologia.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap">
   <style>
     :root {
@@ -62,7 +61,7 @@
       width: 100%;
       max-width: 1248px;
       margin: 0 auto;
-      padding: 0 16px;
+      padding: 0 24px;
     }
 
     /* ── NAV ── */
@@ -111,21 +110,19 @@
     /* ── HERO ── */
     .hero {
       padding: 120px 0 80px;
-      background: linear-gradient(180deg, #1076DD 0%, #5BA8EF 50%, #F4F7FB 100%);
-      text-align: center;
+      background: linear-gradient(180deg, #5BA8EF 0%, #1076DD 100%);
     }
-    .hero h1 { color: #FFFFFF; margin-bottom: 32px; }
+    .hero h1 { color: #FFFFFF; margin-bottom: 24px; }
     .hero-lead {
       font-size: clamp(16px, 2vw, 18px);
       color: rgba(255,255,255,0.9);
       max-width: 736px;
-      margin: 0 auto 32px;
-      line-height: 1.5;
+      margin-bottom: 32px;
+      line-height: 1.6;
     }
     .hero-badges {
       display: flex;
       gap: 12px;
-      justify-content: center;
       flex-wrap: wrap;
       margin-top: 32px;
     }
@@ -145,15 +142,15 @@
     /* ── SECTIONS ── */
     .section { padding: 120px 0; }
     .section-alt { background: var(--bg-card); }
-    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header { margin-bottom: 48px; }
     .section-header h2 { margin-bottom: 16px; }
-    .section-header p { font-size: 18px; max-width: 736px; margin: 0 auto; }
+    .section-header p { font-size: 18px; max-width: 736px; }
     .eyebrow {
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.10em;
       text-transform: uppercase;
-      color: var(--text-body);
+      color: var(--accent);
       margin-bottom: 8px;
     }
 
@@ -202,7 +199,6 @@
       background: var(--bg-card);
       border-radius: 16px;
       padding: 40px 24px;
-      text-align: center;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       counter-increment: step;
       position: relative;
@@ -219,7 +215,7 @@
       color: #FFFFFF;
       font-weight: 600;
       font-size: 22px;
-      margin: 0 auto 16px;
+      margin: 0 0 16px;
     }
     .step h4 { margin-bottom: 8px; }
 
@@ -273,8 +269,7 @@
       margin: 16px 0;
     }
 
-    /* ── ACCORDION / FAQ ── */
-    .accordion { max-width: 992px; margin: 0 auto; }
+    /* ── ACCORDION ── */
     .accordion-item {
       background: var(--bg-card);
       border-radius: 16px;
@@ -319,7 +314,6 @@
     .accordion-body-inner li::marker { color: var(--accent); }
 
     /* ── GUIDE STEPS ── */
-    .guide-steps { max-width: 992px; margin: 0 auto; }
     .guide-step {
       display: flex;
       gap: 24px;
@@ -356,10 +350,6 @@
     .tip-box strong { color: var(--text-heading); }
 
     /* ── BUILD STORY ── */
-    .build-story {
-      max-width: 992px;
-      margin: 0 auto;
-    }
     .build-story p {
       font-size: 18px;
       line-height: 1.6;
@@ -454,7 +444,6 @@
     .page-link-banner {
       background: linear-gradient(135deg, #1076DD 0%, #31B3F9 100%);
       padding: 80px 0;
-      text-align: center;
     }
     .page-link-banner h2 { color: #FFFFFF; margin-bottom: 16px; }
     .page-link-banner p { color: rgba(255,255,255,0.9); font-size: 18px; margin-bottom: 32px; }
@@ -495,7 +484,6 @@
       .steps { grid-template-columns: 1fr 1fr; }
 
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
 
       .guide-step { flex-direction: column; }
       .guide-step-num { width: 48px; height: 48px; min-width: 48px; }
@@ -508,14 +496,11 @@
       .table-wrap { font-size: 14px; }
       .table-wrap th, .table-wrap td { padding: 12px 16px; }
 
-      .hero-badges { flex-direction: column; align-items: center; }
-
       .page-link-banner { padding: 60px 0; }
     }
 
     @media (max-width: 480px) {
       .steps { grid-template-columns: 1fr; }
-      .section-header { margin-bottom: 32px; }
     }
   </style>
 </head>
@@ -533,9 +518,9 @@
       <div class="nav-links" id="navLinks">
         <a href="#o-que-e">O que é</a>
         <a href="#como-funciona">Como funciona</a>
+        <a href="#como-foi-construida">Como foi feita</a>
         <a href="#capacidades">Capacidades</a>
         <a href="#comandos">Comandos</a>
-        <a href="#como-foi-construida">Como foi feita</a>
         <a href="#replicar">Replicar</a>
       </div>
     </div>
@@ -547,9 +532,9 @@
       <p class="eyebrow" style="color: rgba(255,255,255,0.8);">Cursor Agent + Slack + GitHub</p>
       <h1>CurSlack</h1>
       <p class="hero-lead">
-        Um agente de inteligência artificial que o time do Ecommerce na Prática usa direto no Slack
-        para automatizar tarefas de programação, criar documentos e gerenciar código — sem precisar
-        abrir nenhum programa no computador.
+        Um assistente de inteligência artificial que o time do Ecommerce na Prática
+        usa direto no Slack para criar páginas, editar arquivos, organizar projetos
+        e publicar mudanças — sem precisar abrir nenhum programa no computador.
       </p>
       <div class="hero-badges">
         <span class="badge">&#x1F916; IA Autônoma</span>
@@ -567,27 +552,27 @@
         <p class="eyebrow">Visão Geral</p>
         <h2>O que é o CurSlack?</h2>
         <p>
-          É a conexão entre três ferramentas: o <strong>Cursor</strong> (um editor de código com IA),
-          o <strong>Slack</strong> (nosso chat de equipe) e o <strong>GitHub</strong> (onde guardamos nosso código).
-          Juntos, eles criam um assistente que qualquer pessoa do time pode usar para pedir tarefas
-          de tecnologia — tudo por mensagem de texto.
+          É a conexão entre três ferramentas: o <strong>Cursor</strong> (um editor de código com IA embutida),
+          o <strong>Slack</strong> (nosso chat de equipe) e o <strong>GitHub</strong> (a plataforma onde ficam guardados
+          os arquivos dos nossos projetos). Juntos, eles criam um assistente que qualquer pessoa do time pode
+          acionar por mensagem de texto — e ele faz o trabalho sozinho.
         </p>
       </div>
       <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
         <div class="card">
           <div class="card-icon">&#x1F4BB;</div>
           <h4>Sem precisar de computador ligado</h4>
-          <p>O agente roda em uma máquina virtual isolada na nuvem. Você manda a mensagem e pode ir tomar um café.</p>
+          <p>O assistente roda numa máquina na nuvem. Você manda a mensagem no Slack e pode ir tomar um café — ele trabalha sozinho.</p>
         </div>
         <div class="card">
           <div class="card-icon">&#x1F4AC;</div>
           <h4>Conversa natural</h4>
-          <p>Você escreve no Slack como se estivesse pedindo algo para um colega. O agente entende e executa.</p>
+          <p>Você escreve no Slack como se estivesse pedindo algo para um colega. Não precisa saber nenhum comando especial.</p>
         </div>
         <div class="card">
           <div class="card-icon">&#x1F512;</div>
           <h4>Seguro por padrão</h4>
-          <p>Verifica se não há senhas expostas, valida pacotes antes de instalar e pede confirmação antes de ações destrutivas.</p>
+          <p>Antes de publicar qualquer mudança, ele confere se não há senhas expostas e pede confirmação antes de fazer algo que não pode ser desfeito.</p>
         </div>
       </div>
     </div>
@@ -599,56 +584,97 @@
       <div class="section-header">
         <p class="eyebrow">Passo a Passo</p>
         <h2>Como funciona?</h2>
-        <p>De uma mensagem no Slack até um Pull Request pronto — em cinco etapas automáticas.</p>
+        <p>De uma mensagem no Slack até as mudanças publicadas — em cinco etapas automáticas.</p>
       </div>
       <div class="steps">
         <div class="step">
           <h4>Você pede</h4>
-          <p>Menciona <code>@Cursor</code> no Slack com o que precisa.</p>
+          <p>Menciona <code>@Cursor</code> no Slack descrevendo o que precisa.</p>
         </div>
         <div class="step">
-          <h4>Agente inicia</h4>
-          <p>Um Cloud Agent é criado em uma máquina isolada na nuvem.</p>
+          <h4>Assistente inicia</h4>
+          <p>Um assistente é criado numa máquina isolada na nuvem.</p>
         </div>
         <div class="step">
-          <h4>Analisa o código</h4>
-          <p>Clona o repositório, lê os arquivos e entende a estrutura.</p>
+          <h4>Baixa o projeto</h4>
+          <p>Ele baixa os arquivos do projeto do GitHub, lê tudo e entende a estrutura.</p>
         </div>
         <div class="step">
           <h4>Faz as mudanças</h4>
           <p>Edita, cria ou remove arquivos conforme necessário.</p>
         </div>
         <div class="step">
-          <h4>Entrega o resultado</h4>
-          <p>Faz commit, push e cria um Pull Request no GitHub.</p>
+          <h4>Publica o resultado</h4>
+          <p>Salva as alterações, publica no GitHub e cria um pedido de aprovação para alguém do time revisar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FOI CONSTRUÍDA -->
+  <section class="section" id="como-foi-construida">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">Por trás da página</p>
+        <h2>Como esta página foi construída</h2>
+        <p>Tudo o que você está vendo aqui foi criado por um assistente de IA, sem ninguém abrir um editor de código.</p>
+      </div>
+      <div class="build-story">
+        <p>
+          Essa página nasceu de uma conversa no Slack. O Edo (Eduardo Gasparetto) abriu o Slack,
+          mencionou <code>@Cursor</code> e pediu para o assistente criar uma documentação para este projeto.
+          O assistente fez isso sozinho: criou o arquivo, escreveu todo o conteúdo e abriu um
+          pedido de aprovação no GitHub para revisão.
+        </p>
+        <p>
+          Depois, veio uma segunda instrução — também pelo Slack — pedindo para transformar essa
+          documentação numa página visual, seguindo a identidade do Ecommerce na Prática.
+          O assistente então:
+        </p>
+        <ul>
+          <li>Baixou as regras de identidade visual do EnP (cores, fontes, espaçamentos)</li>
+          <li>Leu todas as diretrizes e aplicou automaticamente</li>
+          <li>Usou o logo oficial do EnP direto do site <code>marca.ecommercenapratica.com</code></li>
+          <li>Criou a página com todo o visual e conteúdo num único arquivo</li>
+          <li>Garantiu que a página funciona bem no celular</li>
+          <li>Publicou tudo automaticamente</li>
+        </ul>
+        <p>
+          Cada vez que alguém pede uma mudança — como "alinha tudo à esquerda" ou "troca o gradiente" —
+          o assistente edita a página e publica a versão atualizada. Tudo via Slack, sem abrir
+          nenhum outro programa.
+        </p>
+
+        <div class="tip-box" style="margin-top: 32px;">
+          <p><strong>Aprendizado importante:</strong> sempre passe a URL exata do logo no pedido. Sem isso, o assistente pode usar um logo genérico em vez do logo real da marca.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CAPACIDADES -->
-  <section class="section" id="capacidades">
+  <section class="section section-alt" id="capacidades">
     <div class="container">
       <div class="section-header">
-        <p class="eyebrow">Tudo que o agente sabe fazer</p>
-        <h2>Capacidades Completas</h2>
-        <p>O agente tem acesso a ferramentas poderosas que permitem executar praticamente qualquer tarefa de engenharia de software.</p>
+        <p class="eyebrow">Tudo que o assistente sabe fazer</p>
+        <h2>Capacidades</h2>
+        <p>O assistente tem acesso a várias ferramentas que permitem fazer praticamente qualquer tarefa que envolva arquivos, textos e projetos no GitHub.</p>
       </div>
-      <div class="accordion" id="capabilities">
+      <div id="capabilities">
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F4DD; Leitura e Edição de Código</h4>
+            <h4>&#x1F4DD; Criar e editar arquivos</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>O agente consegue abrir, ler, criar, editar e apagar qualquer arquivo do projeto. Funciona com todas as linguagens de programação — Python, JavaScript, TypeScript, PHP, Java, Go, entre muitas outras.</p>
+              <p>O assistente consegue abrir, ler, criar, editar e apagar qualquer arquivo de um projeto. Funciona com qualquer tipo de arquivo de texto — páginas HTML, planilhas de estilo, documentos, configurações, etc.</p>
               <ul>
-                <li>Lê arquivos de texto, imagens (JPEG, PNG, GIF) e até PDFs</li>
-                <li>Edita trechos específicos de código sem alterar o restante do arquivo</li>
+                <li>Lê arquivos de texto, imagens e até PDFs</li>
+                <li>Edita trechos específicos sem mexer no resto do arquivo</li>
                 <li>Cria novos arquivos quando necessário</li>
-                <li>Remove arquivos obsoletos</li>
+                <li>Remove arquivos que não são mais usados</li>
               </ul>
             </div>
           </div>
@@ -656,15 +682,15 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F50D; Busca Inteligente</h4>
+            <h4>&#x1F50D; Busca inteligente</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Duas ferramentas de busca ajudam o agente a navegar em qualquer tamanho de projeto rapidamente:</p>
+              <p>Mesmo em projetos com centenas de arquivos, o assistente encontra rapidamente o que precisa:</p>
               <ul>
-                <li><strong>Busca por nome de arquivo</strong> — encontra arquivos por padrão (ex: "todos os arquivos .tsx na pasta de componentes")</li>
-                <li><strong>Busca por conteúdo</strong> — encontra trechos específicos de texto ou código dentro dos arquivos, com filtros por tipo e contexto</li>
+                <li><strong>Por nome</strong> — encontra arquivos pelo nome ou extensão (ex: "todos os arquivos HTML da pasta de templates")</li>
+                <li><strong>Por conteúdo</strong> — encontra trechos específicos de texto dentro dos arquivos</li>
               </ul>
             </div>
           </div>
@@ -672,17 +698,16 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F5A5;&#xFE0F; Terminal e Linha de Comando</h4>
+            <h4>&#x1F5A5;&#xFE0F; Executar comandos</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>O agente tem acesso a um terminal completo, como se fosse um desenvolvedor abrindo a linha de comando do computador:</p>
+              <p>O assistente pode executar comandos na máquina, como se fosse alguém usando o computador diretamente:</p>
               <ul>
-                <li>Instala bibliotecas e dependências do projeto</li>
-                <li>Roda testes automatizados para verificar se nada quebrou</li>
-                <li>Compila e builda projetos</li>
-                <li>Inicia servidores de desenvolvimento</li>
+                <li>Instala o que o projeto precisa para funcionar</li>
+                <li>Roda testes automáticos para verificar se nada quebrou</li>
+                <li>Prepara e publica projetos</li>
                 <li>Cada comando pode rodar por até 10 minutos</li>
               </ul>
             </div>
@@ -691,17 +716,17 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F500; Git e Controle de Versão</h4>
+            <h4>&#x1F500; Controle de versão</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Git é o sistema que registra todas as mudanças feitas no código — como um "histórico de versões" do projeto. O agente gerencia isso automaticamente:</p>
+              <p>Toda mudança feita em arquivos é registrada num histórico — assim, dá para voltar atrás se algo der errado. O assistente gerencia isso automaticamente:</p>
               <ul>
-                <li>Salva as alterações (commit) com mensagens claras explicando o que mudou</li>
-                <li>Envia as alterações para o repositório na nuvem (push)</li>
-                <li>Verifica se não há senhas ou dados sensíveis no código antes de enviar</li>
-                <li>Cria e gerencia ramificações (branches) do projeto</li>
+                <li><strong>Salva</strong> as alterações com mensagens claras explicando o que mudou</li>
+                <li><strong>Publica</strong> as alterações no GitHub para o time ver</li>
+                <li><strong>Confere</strong> se não há senhas ou dados sensíveis antes de publicar</li>
+                <li><strong>Cria versões separadas</strong> do projeto quando necessário, para não mexer no que já está no ar</li>
               </ul>
             </div>
           </div>
@@ -709,17 +734,16 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F4CB; Pull Requests no GitHub</h4>
+            <h4>&#x1F4CB; Pedidos de aprovação no GitHub</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Pull Requests (PRs) são pedidos de revisão — quando o agente termina uma tarefa, ele cria um PR para que alguém da equipe aprove antes de publicar:</p>
+              <p>Quando o assistente termina uma tarefa, ele cria um "Pull Request" — que é basicamente um pedido de aprovação. Alguém do time revisa o que foi feito antes de publicar oficialmente:</p>
               <ul>
-                <li>Cria PRs com título e descrição detalhados</li>
-                <li>Atualiza PRs existentes conforme necessário</li>
-                <li>Cria como rascunho (draft) por padrão, para revisão humana</li>
-                <li>Consulta status de testes automáticos (CI/CD)</li>
+                <li>Cria pedidos de aprovação com título e descrição do que foi feito</li>
+                <li>Atualiza pedidos existentes se houver mais mudanças</li>
+                <li>Cria como rascunho por padrão — só publica quando alguém aprovar</li>
               </ul>
             </div>
           </div>
@@ -727,17 +751,17 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F310; Pesquisa na Web</h4>
+            <h4>&#x1F310; Pesquisa na web</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Precisa de informação atualizada? O agente pesquisa na internet em tempo real:</p>
+              <p>Se o assistente precisa de informação atualizada, ele pesquisa na internet em tempo real:</p>
               <ul>
-                <li>Busca documentação de bibliotecas e frameworks</li>
-                <li>Consulta melhores práticas e soluções atuais</li>
-                <li>Acessa e lê páginas web específicas (transforma em texto legível)</li>
-                <li>Verifica versões atuais de pacotes e APIs</li>
+                <li>Busca documentação e referências técnicas</li>
+                <li>Consulta soluções e melhores práticas</li>
+                <li>Acessa e lê páginas da web</li>
+                <li>Verifica versões atuais de ferramentas</li>
               </ul>
             </div>
           </div>
@@ -750,12 +774,12 @@
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>O agente se conecta diretamente ao workspace do Notion da equipe:</p>
+              <p>O assistente se conecta diretamente ao Notion da equipe:</p>
               <ul>
                 <li><strong>Páginas:</strong> cria, edita, duplica, move e busca páginas</li>
-                <li><strong>Bancos de dados:</strong> cria tabelas, adiciona e modifica colunas, cria diferentes visualizações (tabela, kanban, calendário, gráfico)</li>
-                <li><strong>Comentários:</strong> participa de discussões em páginas do Notion</li>
-                <li><strong>Busca semântica:</strong> encontra conteúdo em fontes conectadas (Slack, Google Drive, GitHub, Jira, Linear)</li>
+                <li><strong>Bancos de dados:</strong> cria tabelas, adiciona colunas, cria visualizações (tabela, kanban, calendário, gráfico)</li>
+                <li><strong>Comentários:</strong> participa de discussões nas páginas</li>
+                <li><strong>Busca:</strong> encontra conteúdo em fontes conectadas (Slack, Google Drive, GitHub, Jira, Linear)</li>
               </ul>
             </div>
           </div>
@@ -763,16 +787,16 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F9E9; Sub-Agentes e Tarefas Paralelas</h4>
+            <h4>&#x1F9E9; Tarefas paralelas</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Para tarefas complexas, o agente pode delegar partes do trabalho para sub-agentes especializados:</p>
+              <p>Para tarefas grandes, o assistente pode dividir o trabalho em partes menores e executar várias ao mesmo tempo:</p>
               <ul>
-                <li><strong>Agente de Exploração:</strong> analisa a estrutura de projetos grandes rapidamente</li>
-                <li><strong>Agente de Propósito Geral:</strong> pesquisas complexas e tarefas com múltiplos passos</li>
-                <li><strong>Execução paralela:</strong> vários sub-agentes trabalhando ao mesmo tempo para entregar mais rápido</li>
+                <li>Analisa a estrutura de projetos grandes rapidamente</li>
+                <li>Pesquisas complexas em vários arquivos ao mesmo tempo</li>
+                <li>Vários sub-assistentes trabalhando em paralelo para entregar mais rápido</li>
               </ul>
             </div>
           </div>
@@ -780,18 +804,17 @@
 
         <div class="accordion-item">
           <div class="accordion-header">
-            <h4>&#x1F6E1;&#xFE0F; Segurança Integrada</h4>
+            <h4>&#x1F6E1;&#xFE0F; Segurança</h4>
             <span class="accordion-toggle">+</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-body-inner">
-              <p>Segurança não é opcional — o agente segue regras rigorosas automaticamente:</p>
+              <p>O assistente segue regras de segurança rigorosas automaticamente:</p>
               <ul>
-                <li>Verifica se não há senhas, chaves de API ou tokens expostos antes de cada commit</li>
-                <li>Valida pacotes antes de instalar (evita pacotes maliciosos ou falsos)</li>
-                <li>Alerta antes de executar comandos destrutivos</li>
+                <li>Confere se não há senhas ou chaves de acesso expostas antes de publicar</li>
+                <li>Valida ferramentas antes de instalar (evita pacotes falsos ou perigosos)</li>
+                <li>Avisa antes de executar algo que não pode ser desfeito</li>
                 <li>Detecta ambientes de produção e pede confirmação extra</li>
-                <li>Análise de segurança estática do código gerado (SAST via Snyk)</li>
               </ul>
             </div>
           </div>
@@ -802,26 +825,26 @@
   </section>
 
   <!-- COMANDOS NO SLACK -->
-  <section class="section section-alt" id="comandos">
+  <section class="section" id="comandos">
     <div class="container">
       <div class="section-header">
         <p class="eyebrow">Referência Rápida</p>
         <h2>Comandos no Slack</h2>
-        <p>Tudo o que você precisa digitar para interagir com o agente.</p>
+        <p>Tudo o que você precisa digitar para interagir com o assistente.</p>
       </div>
 
       <div class="table-wrap" style="margin-bottom: 48px;">
         <table>
           <thead>
             <tr>
-              <th>Comando</th>
-              <th>O que faz</th>
+              <th>O que digitar</th>
+              <th>O que acontece</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>@Cursor [instrução]</code></td>
-              <td>Inicia um agente com a tarefa que você descreveu</td>
+              <td><code>@Cursor [seu pedido]</code></td>
+              <td>Inicia o assistente com a tarefa que você descreveu</td>
             </tr>
             <tr>
               <td><code>@Cursor help</code></td>
@@ -829,15 +852,15 @@
             </tr>
             <tr>
               <td><code>@Cursor settings</code></td>
-              <td>Exibe e permite alterar configurações (modelo, repositório, branch)</td>
+              <td>Mostra e permite alterar configurações (projeto, modelo de IA)</td>
             </tr>
             <tr>
               <td><code>@Cursor list my agents</code></td>
-              <td>Lista os agentes que estão rodando agora</td>
+              <td>Lista os assistentes que estão rodando agora</td>
             </tr>
             <tr>
-              <td><code>@Cursor agent [instrução]</code></td>
-              <td>Cria um novo agente na thread (mesmo se já existir um)</td>
+              <td><code>@Cursor agent [seu pedido]</code></td>
+              <td>Cria um novo assistente na conversa (mesmo se já existir um)</td>
             </tr>
             <tr>
               <td><code>@Cursor summarize this thread</code></td>
@@ -847,105 +870,33 @@
         </table>
       </div>
 
-      <div style="max-width: 992px; margin: 0 auto;">
-        <h3 style="margin-bottom: 16px;">Configuração avançada (inline)</h3>
-        <p style="margin-bottom: 16px;">Você pode especificar o repositório, a branch e o modelo diretamente na mensagem:</p>
-        <div class="code-block">@Cursor [branch=dev, model=opus, repo=seu-usuario/seu-repo] Corrija o bug de login</div>
+      <div>
+        <h3 style="margin-bottom: 16px;">Configuração avançada</h3>
+        <p style="margin-bottom: 16px;">Você pode escolher o projeto, a versão e o modelo de IA diretamente na mensagem:</p>
+        <div class="code-block">@Cursor [branch=dev, model=opus, repo=seu-usuario/seu-projeto] Corrija o problema na página de contato</div>
 
         <div class="tip-box" style="margin-top: 24px;">
-          <p><strong>Dica:</strong> Use <code>@Cursor settings</code> para definir seus padrões e evitar repetir esses parâmetros em toda mensagem.</p>
+          <p><strong>Dica:</strong> Use <code>@Cursor settings</code> para salvar seus padrões e não precisar repetir essas opções toda vez.</p>
         </div>
 
-        <h3 style="margin-top: 48px; margin-bottom: 16px;">Exemplos práticos</h3>
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">Exemplos de uso</h3>
         <div class="card-grid" style="grid-template-columns: 1fr;">
           <div class="card" style="padding: 24px 32px;">
-            <p class="eyebrow" style="margin-bottom: 4px;">Correção de bug</p>
-            <div class="code-block" style="margin: 0;">@Cursor O endpoint /api/users retorna 500 quando o email é vazio. Corrija e crie um PR.</div>
+            <p class="eyebrow" style="margin-bottom: 4px;">Corrigir um problema</p>
+            <div class="code-block" style="margin: 0;">@Cursor A página de contato não carrega quando o campo de email está vazio. Corrija e crie um pedido de aprovação.</div>
           </div>
           <div class="card" style="padding: 24px 32px;">
-            <p class="eyebrow" style="margin-bottom: 4px;">Refatoração</p>
-            <div class="code-block" style="margin: 0;">@Cursor Refatore os componentes React de classe para funcionais com hooks em src/components/</div>
+            <p class="eyebrow" style="margin-bottom: 4px;">Criar conteúdo</p>
+            <div class="code-block" style="margin: 0;">@Cursor Crie uma página HTML com a documentação do projeto seguindo a identidade visual do EnP</div>
           </div>
           <div class="card" style="padding: 24px 32px;">
-            <p class="eyebrow" style="margin-bottom: 4px;">Documentação</p>
-            <div class="code-block" style="margin: 0;">@Cursor Adicione JSDoc a todas as funções exportadas em src/utils/</div>
-          </div>
-          <div class="card" style="padding: 24px 32px;">
-            <p class="eyebrow" style="margin-bottom: 4px;">Criação de feature</p>
-            <div class="code-block" style="margin: 0;">@Cursor [branch=feature/dark-mode] Implemente dark mode. Adicione toggle no header e use CSS variables.</div>
+            <p class="eyebrow" style="margin-bottom: 4px;">Organizar arquivos</p>
+            <div class="code-block" style="margin: 0;">@Cursor Adicione descrições em todos os arquivos da pasta de utilitários</div>
           </div>
           <div class="card" style="padding: 24px 32px;">
             <p class="eyebrow" style="margin-bottom: 4px;">Notion</p>
-            <div class="code-block" style="margin: 0;">@Cursor Crie uma página no Notion com o resumo das alterações do último sprint</div>
+            <div class="code-block" style="margin: 0;">@Cursor Crie uma página no Notion com o resumo das mudanças feitas neste mês</div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMO FOI CONSTRUÍDA -->
-  <section class="section" id="como-foi-construida">
-    <div class="container">
-      <div class="section-header">
-        <p class="eyebrow">Por trás da página</p>
-        <h2>Como esta página foi construída</h2>
-        <p>Tudo o que você está vendo aqui foi feito por um agente de IA, sem ninguém abrir um editor de código.</p>
-      </div>
-      <div class="build-story">
-        <p>
-          Essa página nasceu de uma conversa no Slack. O Edo (Eduardo Gasparetto) abriu o Slack,
-          mencionou <code>@Cursor</code> e pediu para o agente criar um README para este repositório.
-          O agente fez isso automaticamente: criou o arquivo, escreveu toda a documentação e abriu
-          um Pull Request no GitHub como rascunho.
-        </p>
-        <p>
-          Depois, veio uma segunda instrução — também via Slack — pedindo para transformar esse README
-          em uma página HTML bonita, seguindo o <strong>Design System oficial do Ecommerce na Prática</strong>.
-          O agente então:
-        </p>
-        <ul>
-          <li>Instalou a <strong>skill do Design System EnP</strong> a partir do repositório no GitHub</li>
-          <li>Leu todas as regras de cores, tipografia, espaçamento, botões e componentes</li>
-          <li>Escolheu o modo <strong>Institucional Claro</strong> (fundo cinza claro #F4F7FB, textos escuros, botões azuis)</li>
-          <li>Usou o logo oficial do EnP direto da URL <code>marca.ecommercenapratica.com</code></li>
-          <li>Criou o arquivo <code>index.html</code> com todo o CSS e JS embutidos no mesmo arquivo</li>
-          <li>Aplicou a fonte <strong>Plus Jakarta Sans</strong> nos pesos 400 (normal) e 600 (negrito)</li>
-          <li>Usou espaçamentos em múltiplos de 4px, como define o Design System</li>
-          <li>Garantiu que a página funciona bem no celular (design responsivo)</li>
-        </ul>
-
-        <h3>O que é o Design System EnP?</h3>
-        <p>
-          Um Design System é como um "manual de identidade visual para código". Ele define exatamente
-          quais cores, fontes, tamanhos, espaçamentos e componentes devem ser usados em tudo que o
-          Ecommerce na Prática constrói digitalmente. É baseado nas diretrizes da Nuvemshop, mas
-          adaptado com a identidade própria do EnP.
-        </p>
-        <p>
-          A "skill" do Design System é um pacote de arquivos que ensina ao Cursor todas essas regras.
-          Quando a skill está instalada, toda vez que o agente precisa criar algo visual para o EnP,
-          ele automaticamente consulta essas regras e as aplica — sem que ninguém precise explicar
-          de novo quais cores ou fontes usar.
-        </p>
-
-        <h3>Três estilos disponíveis</h3>
-        <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin-top: 16px;">
-          <div class="card" style="background: #F4F7FB; border: 2px solid var(--accent);">
-            <h4 style="color: #313642;">Institucional Claro</h4>
-            <p style="color: #5C6167;">Fundo Frost #F4F7FB, textos escuros, CTA azul #1076DD. Usado nesta página, no site, blog e escola.</p>
-          </div>
-          <div class="card" style="background: #212328;">
-            <h4 style="color: #FFFFFF;">Escuro Institucional</h4>
-            <p style="color: #BDC0C6;">Fundo #212328, textos claros, CTA azul celeste #31B3F9. Para versões escuras do site.</p>
-          </div>
-          <div class="card" style="background: #0D1B2E;">
-            <h4 style="color: #FFFFFF;">Serviços</h4>
-            <p style="color: #BDC0C6;">Fundo Midnight #0D1B2E, textos claros, CTA lima #CDFF07. Para páginas de consultoria e planos.</p>
-          </div>
-        </div>
-
-        <div class="tip-box" style="margin-top: 32px;">
-          <p><strong>Aprendizado importante:</strong> sempre passe a URL exata do logo no prompt. Sem isso, o agente pode usar um placeholder genérico em vez do logo real da marca.</p>
         </div>
       </div>
     </div>
@@ -956,10 +907,10 @@
     <div class="container">
       <div class="section-header">
         <p class="eyebrow">Tutorial</p>
-        <h2>Como replicar esta configuração</h2>
-        <p>Siga este passo a passo para ter o mesmo ambiente funcionando: Cursor + Slack + agente de IA conectado ao seu repositório.</p>
+        <h2>Como montar o mesmo ambiente</h2>
+        <p>Siga este passo a passo para ter o Cursor + Slack + assistente de IA funcionando no seu projeto.</p>
       </div>
-      <div class="guide-steps">
+      <div>
 
         <div class="guide-step">
           <div class="guide-step-num">1</div>
@@ -967,11 +918,11 @@
             <h3>Crie uma conta no Cursor</h3>
             <p>
               Acesse <a href="https://cursor.com" target="_blank" rel="noopener noreferrer">cursor.com</a> e crie sua conta.
-              O Cursor é um editor de código com IA integrada. Você vai precisar de um plano que inclua
-              <strong>Cloud Agents</strong> (agentes na nuvem).
+              O Cursor é um editor de código com IA embutida. Você vai precisar de um plano que inclua
+              os assistentes na nuvem (Cloud Agents).
             </p>
             <div class="tip-box">
-              <p><strong>Nota:</strong> Cloud Agents estão disponíveis nos planos pagos. Confira os planos em <a href="https://cursor.com/pricing" target="_blank" rel="noopener noreferrer">cursor.com/pricing</a>.</p>
+              <p><strong>Nota:</strong> Os assistentes na nuvem estão disponíveis nos planos pagos. Confira em <a href="https://cursor.com/pricing" target="_blank" rel="noopener noreferrer">cursor.com/pricing</a>.</p>
             </div>
           </div>
         </div>
@@ -981,13 +932,13 @@
           <div class="guide-step-content">
             <h3>Conecte o Slack</h3>
             <p>
-              No painel do Cursor, vá em <strong>Dashboard → Integrations → Slack</strong> e autorize o app do Cursor
-              no workspace do Slack da sua equipe.
+              No painel do Cursor, vá em <strong>Dashboard &rarr; Integrations &rarr; Slack</strong> e autorize o app do Cursor
+              no Slack da sua equipe.
             </p>
             <p>
-              Após a instalação, o bot <code>@Cursor</code> aparecerá nos canais do Slack.
-              Recomendamos criar um canal dedicado como <code>#dev-bot</code> para manter as automações
-              separadas das conversas regulares.
+              Depois disso, o bot <code>@Cursor</code> aparece nos canais do Slack.
+              Recomendamos criar um canal separado como <code>#dev-bot</code> para manter os pedidos
+              ao assistente organizados.
             </p>
           </div>
         </div>
@@ -997,9 +948,8 @@
           <div class="guide-step-content">
             <h3>Conecte o GitHub</h3>
             <p>
-              Ainda no Dashboard do Cursor, conecte sua conta do GitHub. O agente precisa de acesso
-              ao repositório onde vai trabalhar. Certifique-se de que as permissões estão corretas
-              para que ele possa criar branches e Pull Requests.
+              Ainda no Dashboard do Cursor, conecte sua conta do GitHub. O assistente precisa ter acesso
+              ao projeto onde vai trabalhar — para poder baixar os arquivos, fazer mudanças e publicar de volta.
             </p>
           </div>
         </div>
@@ -1008,12 +958,12 @@
           <div class="guide-step-num">4</div>
           <div class="guide-step-content">
             <h3>Configure seus padrões</h3>
-            <p>No Slack, digite o seguinte comando para definir seu repositório e modelo padrão:</p>
+            <p>No Slack, digite:</p>
             <div class="code-block">@Cursor settings</div>
             <p>
-              Isso abre as configurações onde você pode definir qual repositório do GitHub, qual branch
-              e qual modelo de IA o agente deve usar por padrão. Assim, você não precisa repetir essas
-              informações em cada mensagem.
+              Isso abre as configurações onde você define qual projeto do GitHub e qual modelo de IA
+              o assistente deve usar por padrão. Assim, você não precisa repetir essas informações
+              em cada mensagem.
             </p>
           </div>
         </div>
@@ -1021,15 +971,15 @@
         <div class="guide-step">
           <div class="guide-step-num">5</div>
           <div class="guide-step-content">
-            <h3>Instale o Design System EnP (opcional)</h3>
+            <h3>Ensine a identidade visual do EnP (opcional)</h3>
             <p>
-              Se quiser que o agente siga a identidade visual do EnP automaticamente, instale a skill
-              do Design System. No Slack, envie:
+              Se quiser que o assistente siga a identidade visual do EnP automaticamente quando criar
+              páginas ou interfaces, peça no Slack:
             </p>
             <div class="code-block">@Cursor Instale a skill enp-design-system a partir do repositório https://github.com/eduardogasparetto-cpu/enp-design-system — clone e copie os arquivos da pasta skill/ para .cursor/skills/enp-design-system/ e da pasta rule/ para .cursor/rules/</div>
             <p>
-              A partir de agora, toda vez que o agente precisar criar algo visual para o EnP, ele
-              vai consultar automaticamente as regras de cores, fontes e componentes.
+              A partir daí, toda vez que o assistente criar algo visual para o EnP, ele vai seguir
+              automaticamente as regras de cores, fontes e componentes da marca.
             </p>
           </div>
         </div>
@@ -1038,12 +988,12 @@
           <div class="guide-step-num">6</div>
           <div class="guide-step-content">
             <h3>Faça seu primeiro pedido</h3>
-            <p>Pronto! Agora é só mencionar o <code>@Cursor</code> no Slack com uma instrução. Comece com algo simples para testar:</p>
+            <p>Pronto! Agora é só mencionar <code>@Cursor</code> no Slack. Comece com algo simples:</p>
             <div class="code-block">@Cursor help</div>
-            <p>Depois tente algo mais elaborado:</p>
-            <div class="code-block">@Cursor Crie um arquivo README.md para este repositório descrevendo o projeto</div>
+            <p>Depois tente algo mais completo:</p>
+            <div class="code-block">@Cursor Crie um arquivo README.md descrevendo este projeto</div>
             <div class="tip-box" style="margin-top: 16px;">
-              <p><strong>Dica:</strong> O agente lê toda a thread do Slack. Se precisa dar mais contexto ou refinar a instrução, basta responder na mesma thread.</p>
+              <p><strong>Dica:</strong> O assistente lê toda a conversa da thread. Se precisa dar mais contexto ou pedir ajustes, basta responder na mesma thread.</p>
             </div>
           </div>
         </div>
@@ -1061,20 +1011,20 @@
       </div>
       <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
         <div class="card">
-          <h4>GitHub apenas</h4>
-          <p>Atualmente funciona somente com repositórios no GitHub. Suporte ao GitLab está em desenvolvimento.</p>
+          <h4>Só GitHub</h4>
+          <p>Funciona apenas com projetos no GitHub por enquanto. Suporte a outras plataformas está em desenvolvimento.</p>
         </div>
         <div class="card">
-          <h4>Slack apenas</h4>
-          <p>A integração via chat funciona apenas no Slack. Microsoft Teams e outras plataformas ainda não são suportadas.</p>
+          <h4>Só Slack</h4>
+          <p>A integração via chat funciona apenas no Slack. Microsoft Teams e outros apps de mensagem ainda não são suportados.</p>
         </div>
         <div class="card">
-          <h4>Sem perguntas durante a execução</h4>
-          <p>O agente opera de forma autônoma. Se a instrução for ambígua, ele toma a melhor decisão possível sem perguntar.</p>
+          <h4>Não faz perguntas</h4>
+          <p>O assistente trabalha de forma autônoma. Se a instrução não for clara, ele toma a melhor decisão possível em vez de perguntar.</p>
         </div>
         <div class="card">
           <h4>Limite de tempo</h4>
-          <p>Cada comando de terminal tem limite máximo de 10 minutos. Tarefas muito longas precisam ser divididas.</p>
+          <p>Cada comando que ele executa tem limite de 10 minutos. Tarefas muito longas precisam ser divididas em partes menores.</p>
         </div>
       </div>
     </div>
@@ -1097,13 +1047,14 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="https://marca.ecommercenapratica.com/images/logos/logo-branco-ecommerce-na-pratica.svg" alt="Ecommerce na Prática" width="180" height="32">
-          <p>CurSlack é uma ferramenta interna do time de tecnologia do Ecommerce na Prática, conectando Cursor AI ao Slack para automatizar tarefas de engenharia.</p>
+          <p>CurSlack é uma ferramenta interna do time do Ecommerce na Prática. Conecta o Cursor AI ao Slack para automatizar tarefas de tecnologia.</p>
         </div>
         <div>
           <h4>Navegação</h4>
           <ul class="footer-links">
             <li><a href="#o-que-e">O que é</a></li>
             <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#como-foi-construida">Como foi feita</a></li>
             <li><a href="#capacidades">Capacidades</a></li>
             <li><a href="#comandos">Comandos</a></li>
           </ul>
@@ -1111,15 +1062,15 @@
         <div>
           <h4>Links Úteis</h4>
           <ul class="footer-links">
-            <li><a href="https://cursor.com/docs/cloud-agent/capabilities" target="_blank" rel="noopener noreferrer">Cursor Cloud Agents</a></li>
+            <li><a href="https://cursor.com" target="_blank" rel="noopener noreferrer">Cursor</a></li>
             <li><a href="https://cursor.com/docs/integrations/slack" target="_blank" rel="noopener noreferrer">Cursor + Slack</a></li>
-            <li><a href="https://github.com/eduardogasparetto-cpu/curslack" target="_blank" rel="noopener noreferrer">Repositório no GitHub</a></li>
-            <li><a href="https://github.com/eduardogasparetto-cpu/enp-design-system" target="_blank" rel="noopener noreferrer">Design System EnP</a></li>
+            <li><a href="https://github.com/eduardogasparetto-cpu/curslack" target="_blank" rel="noopener noreferrer">Este projeto no GitHub</a></li>
+            <li><a href="https://github.com/eduardogasparetto-cpu/enp-design-system" target="_blank" rel="noopener noreferrer">Identidade Visual EnP</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>Ecommerce na Prática &copy; 2026. Página gerada automaticamente por Cursor Cloud Agent.</p>
+        <p>Ecommerce na Prática &copy; 2026. Página criada automaticamente por Cursor Cloud Agent.</p>
         <a href="#link-da-pagina">eduardogasparetto-cpu.github.io/curslack</a>
       </div>
     </div>
