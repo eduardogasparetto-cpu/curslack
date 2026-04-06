@@ -37,7 +37,7 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { font-size: 16px; scroll-behavior: smooth; }
+    html { font-size: 16px; scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Helvetica Neue", arial, sans-serif;
@@ -46,6 +46,7 @@
       background-color: var(--bg-page);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     h1, h2, h3, h4 { color: var(--text-heading); font-weight: 600; }
@@ -191,6 +192,7 @@
       padding: 40px 32px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+      min-width: 0;
     }
     .card:hover {
       transform: translateY(-4px);
@@ -226,6 +228,7 @@
       padding: 40px 32px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+      min-width: 0;
     }
     .step-v2:hover {
       transform: translateY(-4px);
@@ -293,6 +296,7 @@
       font-weight: 600;
       font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
       color: var(--text-heading);
+      word-break: break-word;
     }
 
     /* ── CODE BLOCKS ── */
@@ -301,12 +305,17 @@
       border-radius: 16px;
       padding: 24px;
       overflow-x: auto;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+      white-space: pre-wrap;
       font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
       font-size: 14px;
       font-weight: 600;
       line-height: 1.5;
       color: var(--text-heading);
       margin: 16px 0;
+      max-width: 100%;
     }
 
     /* ── GUIDE STEPS ── */
@@ -329,7 +338,7 @@
       align-items: center;
       justify-content: center;
     }
-    .guide-step-content { flex: 1; }
+    .guide-step-content { flex: 1; min-width: 0; }
     .guide-step-content h3 { margin-bottom: 8px; }
     .guide-step-content p { margin-bottom: 16px; line-height: 1.5; }
     .guide-step-content .code-block { margin-top: 8px; }
@@ -343,8 +352,13 @@
       margin: 24px 0;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       line-height: 1.5;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
     .tip-box strong { color: var(--text-heading); }
+    .tip-box code, .story-col code, .guide-step-content code {
+      word-break: break-word;
+    }
 
     /* ── BUTTONS ── */
     .btn {
@@ -426,6 +440,7 @@
       padding: 40px 32px;
       margin-bottom: 48px;
       color: #FFFFFF;
+      overflow: hidden;
     }
     .prompt-cta h3 { color: #FFFFFF; margin-bottom: 8px; }
     .prompt-cta p { color: rgba(255,255,255,0.9); margin-bottom: 16px; }
@@ -486,6 +501,11 @@
 
       .table-wrap { font-size: 14px; }
       .table-wrap th, .table-wrap td { padding: 12px 16px; }
+
+      .code-block { padding: 16px; font-size: 13px; border-radius: 12px; }
+      .prompt-cta { padding: 24px 16px; }
+      .prompt-cta .code-block { padding: 16px; }
+      .tip-box { padding: 16px 20px; }
     }
   </style>
 </head>
