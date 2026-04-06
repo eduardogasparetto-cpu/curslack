@@ -199,6 +199,8 @@
     .card h3 { margin-bottom: 8px; }
     .card h4 { margin-bottom: 8px; }
     .card p { margin-bottom: 0; line-height: 1.5; }
+    .card li { margin-bottom: 6px; line-height: 1.5; }
+    .card li::marker { color: var(--accent); }
 
     .card-grid {
       display: grid;
@@ -304,51 +306,6 @@
       color: var(--text-heading);
       margin: 16px 0;
     }
-
-    /* ── ACCORDION ── */
-    .accordion-item {
-      background: var(--bg-card);
-      border-radius: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      overflow: hidden;
-    }
-    .accordion-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 32px;
-      cursor: pointer;
-      gap: 16px;
-      user-select: none;
-    }
-    .accordion-header h4 { flex: 1; margin: 0; display: flex; align-items: center; gap: 8px; }
-    .accordion-header h4 svg { width: 24px; height: 24px; flex-shrink: 0; color: var(--text-heading); }
-    .accordion-toggle {
-      width: 32px;
-      height: 32px;
-      border-radius: 100px;
-      background: var(--bg-card-inner);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--accent);
-      flex-shrink: 0;
-      transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-    .accordion-item.open .accordion-toggle { transform: rotate(45deg); }
-    .accordion-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-    .accordion-body-inner { padding: 0 32px 24px; }
-    .accordion-body-inner p { margin-bottom: 16px; line-height: 1.5; }
-    .accordion-body-inner ul { padding-left: 24px; margin-bottom: 16px; }
-    .accordion-body-inner li { margin-bottom: 8px; line-height: 1.5; }
-    .accordion-body-inner li::marker { color: var(--accent); }
 
     /* ── GUIDE STEPS ── */
     .guide-step {
@@ -458,7 +415,7 @@
       }
       .nav-toggle { display: block; }
 
-      .card-grid { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr !important; }
       .steps-v2 { grid-template-columns: 1fr; }
       .step-v2 { padding: 24px; }
       .step-v2-final { grid-column: auto; }
@@ -467,9 +424,6 @@
 
       .guide-step { flex-direction: column; }
       .guide-step-num { width: 48px; height: 48px; min-width: 48px; }
-
-      .accordion-header { padding: 16px 24px; }
-      .accordion-body-inner { padding: 0 24px 16px; }
 
       .card { padding: 32px 24px; }
 
@@ -637,183 +591,123 @@
         <h2>Capacidades</h2>
         <p>O assistente tem acesso a várias ferramentas que permitem fazer praticamente qualquer tarefa que envolva arquivos, textos e projetos no GitHub.</p>
       </div>
-      <div id="capabilities">
+      <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M13.8 2.2a2.51 2.51 0 0 0-3.54 0l-6.9 6.91-1.76 3.62a1.26 1.26 0 0 0 1.12 1.8 1.2 1.2 0 0 0 .55-.13l3.62-1.76 6-6 .83-.82.06-.06a2.52 2.52 0 0 0 .02-3.56m-.89.89a1.25 1.25 0 0 1 0 1.77l-1.77-1.77a1.24 1.24 0 0 1 .86-.37 1.22 1.22 0 0 1 .91.37M2.73 13.27 4.29 10 6 11.71zm4.16-2.4L5.13 9.11 10.26 4 12 5.74z"/></svg> Criar e editar arquivos</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>O assistente consegue abrir, ler, criar, editar e apagar qualquer arquivo de um projeto. Funciona com qualquer tipo de arquivo de texto - páginas HTML, planilhas de estilo, documentos, configurações, etc.</p>
-              <ul>
-                <li>Lê arquivos de texto, imagens e até PDFs</li>
-                <li>Edita trechos específicos sem mexer no resto do arquivo</li>
-                <li>Cria novos arquivos quando necessário</li>
-                <li>Remove arquivos que não são mais usados</li>
-              </ul>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M13.8 2.2a2.51 2.51 0 0 0-3.54 0l-6.9 6.91-1.76 3.62a1.26 1.26 0 0 0 1.12 1.8 1.2 1.2 0 0 0 .55-.13l3.62-1.76 6-6 .83-.82.06-.06a2.52 2.52 0 0 0 .02-3.56m-.89.89a1.25 1.25 0 0 1 0 1.77l-1.77-1.77a1.24 1.24 0 0 1 .86-.37 1.22 1.22 0 0 1 .91.37M2.73 13.27 4.29 10 6 11.71zm4.16-2.4L5.13 9.11 10.26 4 12 5.74z"/></svg></div>
+          <h4>Criar e editar arquivos</h4>
+          <p>Abre, lê, cria, edita e apaga qualquer arquivo de um projeto. Funciona com qualquer tipo de arquivo de texto - páginas HTML, planilhas de estilo, documentos, configurações, etc.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li>Lê arquivos de texto, imagens e até PDFs</li>
+            <li>Edita trechos específicos sem mexer no resto do arquivo</li>
+            <li>Cria novos arquivos quando necessário</li>
+            <li>Remove arquivos que não são mais usados</li>
+          </ul>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M13.5 6.73 11 5 7.68 7.53 6 6 2.5 8.49V11h11zm-1.25 3h-8.5v-.59L5.9 7.6l.94.86.77.7.83-.63 2.59-2 1.22.84z"/><path d="M14.75 2.5H1.25A1.25 1.25 0 0 0 0 3.75v8.5a1.25 1.25 0 0 0 1.25 1.25h13.5A1.25 1.25 0 0 0 16 12.25v-8.5a1.25 1.25 0 0 0-1.25-1.25m0 9.75H1.25v-8.5h13.5z"/></svg> Análise de imagens</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>O assistente entende e analisa o conteúdo visual de imagens (JPEG, PNG, GIF, WebP). Não só "abre o arquivo" - ele interpreta o que está na imagem:</p>
-              <ul>
-                <li>Recebe um <strong>screenshot de um bug</strong> e entende o que está acontecendo</li>
-                <li>Recebe uma <strong>foto de um rascunho no papel</strong> e transforma em código</li>
-                <li>Recebe um <strong>print de um site</strong> e recria o layout</li>
-                <li>Recebe um <strong>criativo exportado como imagem</strong> e implementa</li>
-              </ul>
-              <p><strong>Não entende:</strong> áudio (MP3, WAV) e vídeo (MP4, WebM).</p>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M13.5 6.73 11 5 7.68 7.53 6 6 2.5 8.49V11h11zm-1.25 3h-8.5v-.59L5.9 7.6l.94.86.77.7.83-.63 2.59-2 1.22.84z"/><path d="M14.75 2.5H1.25A1.25 1.25 0 0 0 0 3.75v8.5a1.25 1.25 0 0 0 1.25 1.25h13.5A1.25 1.25 0 0 0 16 12.25v-8.5a1.25 1.25 0 0 0-1.25-1.25m0 9.75H1.25v-8.5h13.5z"/></svg></div>
+          <h4>Análise de imagens</h4>
+          <p>Entende e analisa o conteúdo visual de imagens (JPEG, PNG, GIF, WebP). Não só "abre o arquivo" - ele interpreta o que está na imagem.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li>Recebe um <strong>screenshot de um bug</strong> e entende o que está acontecendo</li>
+            <li>Recebe uma <strong>foto de um rascunho no papel</strong> e transforma em código</li>
+            <li>Recebe um <strong>print de um site</strong> e recria o layout</li>
+            <li>Recebe um <strong>criativo exportado como imagem</strong> e implementa</li>
+          </ul>
+          <p style="margin-top: 12px;"><strong>Não entende:</strong> áudio (MP3, WAV) e vídeo (MP4, WebM).</p>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="m14.91 13.09-3.68-3.21a4.86 4.86 0 0 0 .86-2.77A5.34 5.34 0 0 0 6.59 2a5.35 5.35 0 0 0-5.5 5.15 5.34 5.34 0 0 0 5.5 5.15 5.7 5.7 0 0 0 3.82-1.44L14.08 14zM6.59 11a4.09 4.09 0 0 1-4.25-3.9 4.09 4.09 0 0 1 4.25-3.9 4.09 4.09 0 0 1 4.25 3.9A4.08 4.08 0 0 1 6.59 11"/></svg> Busca inteligente</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>Mesmo em projetos com centenas de arquivos, o assistente encontra rapidamente o que precisa:</p>
-              <ul>
-                <li><strong>Por nome</strong> - encontra arquivos pelo nome ou extensão (ex: "todos os arquivos HTML da pasta de templates")</li>
-                <li><strong>Por conteúdo</strong> - encontra trechos específicos de texto dentro dos arquivos</li>
-              </ul>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="m14.91 13.09-3.68-3.21a4.86 4.86 0 0 0 .86-2.77A5.34 5.34 0 0 0 6.59 2a5.35 5.35 0 0 0-5.5 5.15 5.34 5.34 0 0 0 5.5 5.15 5.7 5.7 0 0 0 3.82-1.44L14.08 14zM6.59 11a4.09 4.09 0 0 1-4.25-3.9 4.09 4.09 0 0 1 4.25-3.9 4.09 4.09 0 0 1 4.25 3.9A4.08 4.08 0 0 1 6.59 11"/></svg></div>
+          <h4>Busca inteligente</h4>
+          <p>Mesmo em projetos com centenas de arquivos, o assistente encontra rapidamente o que precisa.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li><strong>Por nome</strong> - encontra arquivos pelo nome ou extensão</li>
+            <li><strong>Por conteúdo</strong> - encontra trechos específicos de texto dentro dos arquivos</li>
+          </ul>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="m9.539.613-3.9 14.55 1.209.324L10.746.937 9.54.612zm-5.63 3.434L.598 7.137a1.24 1.24 0 0 0 0 1.821l3.25 3.091.921-.85-3.321-3.15 3.321-3.112zm11.893 3.091-3.31-3.091-.861.91 3.32 3.091-3.32 3.111.92.85 3.251-3.05a1.24 1.24 0 0 0 0-1.821"/></svg> Executar comandos</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>O assistente pode executar comandos na máquina, como se fosse alguém usando o computador diretamente:</p>
-              <ul>
-                <li>Instala o que o projeto precisa para funcionar</li>
-                <li>Roda testes automáticos para verificar se nada quebrou</li>
-                <li>Prepara e publica projetos</li>
-                <li>Cada comando pode rodar por até 10 minutos</li>
-              </ul>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="m9.539.613-3.9 14.55 1.209.324L10.746.937 9.54.612zm-5.63 3.434L.598 7.137a1.24 1.24 0 0 0 0 1.821l3.25 3.091.921-.85-3.321-3.15 3.321-3.112zm11.893 3.091-3.31-3.091-.861.91 3.32 3.091-3.32 3.111.92.85 3.251-3.05a1.24 1.24 0 0 0 0-1.821"/></svg></div>
+          <h4>Executar comandos</h4>
+          <p>Pode executar comandos na máquina, como se fosse alguém usando o computador diretamente.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li>Instala o que o projeto precisa para funcionar</li>
+            <li>Roda testes automáticos para verificar se nada quebrou</li>
+            <li>Prepara e publica projetos</li>
+            <li>Cada comando pode rodar por até 10 minutos</li>
+          </ul>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8.06.56A8.05 8.05 0 0 0 1.24 4.2V1.55H0V5a1.16 1.16 0 0 0 1.15 1.14h3.44V4.9H2.27a6.79 6.79 0 0 1 5.79-3.1 6.48 6.48 0 0 1 6.7 6.2 6.48 6.48 0 0 1-6.7 6.2A6.48 6.48 0 0 1 1.36 8H.12a7.71 7.71 0 0 0 7.94 7.44A7.71 7.71 0 0 0 16 8 7.71 7.71 0 0 0 8.06.56"/><path d="M7.44 4.28v4.34h3.6V7.38H8.68v-3.1z"/></svg> Controle de versão</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>Toda mudança feita em arquivos é registrada num histórico - assim, dá para voltar atrás se algo der errado. O assistente gerencia isso automaticamente:</p>
-              <ul>
-                <li><strong>Salva</strong> as alterações com mensagens claras explicando o que mudou</li>
-                <li><strong>Publica</strong> as alterações no GitHub para o time ver</li>
-                <li><strong>Confere</strong> se não há senhas ou dados sensíveis antes de publicar</li>
-                <li><strong>Cria versões separadas</strong> do projeto quando necessário, para não mexer no que já está no ar</li>
-              </ul>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8.06.56A8.05 8.05 0 0 0 1.24 4.2V1.55H0V5a1.16 1.16 0 0 0 1.15 1.14h3.44V4.9H2.27a6.79 6.79 0 0 1 5.79-3.1 6.48 6.48 0 0 1 6.7 6.2 6.48 6.48 0 0 1-6.7 6.2A6.48 6.48 0 0 1 1.36 8H.12a7.71 7.71 0 0 0 7.94 7.44A7.71 7.71 0 0 0 16 8 7.71 7.71 0 0 0 8.06.56"/><path d="M7.44 4.28v4.34h3.6V7.38H8.68v-3.1z"/></svg></div>
+          <h4>Controle de versão</h4>
+          <p>Toda mudança é registrada num histórico - dá para voltar atrás se algo der errado.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li><strong>Salva</strong> as alterações com mensagens claras explicando o que mudou</li>
+            <li><strong>Publica</strong> as alterações no GitHub para o time ver</li>
+            <li><strong>Confere</strong> se não há senhas ou dados sensíveis antes de publicar</li>
+            <li><strong>Cria versões separadas</strong> do projeto quando necessário</li>
+          </ul>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M6.53 9.02 4.58 7.07l-.88.89 2.83 2.83.88-.89 4.78-4.77-.89-.88z"/><path d="M8 .5A7.77 7.77 0 0 0 0 8a7.77 7.77 0 0 0 8 7.5A7.77 7.77 0 0 0 16 8 7.77 7.77 0 0 0 8 .5m0 13.75A6.52 6.52 0 0 1 1.25 8 6.52 6.52 0 0 1 8 1.75 6.52 6.52 0 0 1 14.75 8 6.52 6.52 0 0 1 8 14.25"/></svg> Pedidos de aprovação no GitHub</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>Quando o assistente termina uma tarefa, ele cria um "Pull Request" - que é basicamente um pedido de aprovação. Alguém do time revisa o que foi feito antes de publicar oficialmente:</p>
-              <ul>
-                <li>Cria pedidos de aprovação com título e descrição do que foi feito</li>
-                <li>Atualiza pedidos existentes se houver mais mudanças</li>
-                <li>Cria como rascunho por padrão - só publica quando alguém aprovar</li>
-              </ul>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M6.53 9.02 4.58 7.07l-.88.89 2.83 2.83.88-.89 4.78-4.77-.89-.88z"/><path d="M8 .5A7.77 7.77 0 0 0 0 8a7.77 7.77 0 0 0 8 7.5A7.77 7.77 0 0 0 16 8 7.77 7.77 0 0 0 8 .5m0 13.75A6.52 6.52 0 0 1 1.25 8 6.52 6.52 0 0 1 8 1.75 6.52 6.52 0 0 1 14.75 8 6.52 6.52 0 0 1 8 14.25"/></svg></div>
+          <h4>Pedidos de aprovação no GitHub</h4>
+          <p>Quando termina uma tarefa, cria um pedido de aprovação para alguém do time revisar antes de publicar.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li>Cria pedidos de aprovação com título e descrição do que foi feito</li>
+            <li>Atualiza pedidos existentes se houver mais mudanças</li>
+            <li>Cria como rascunho por padrão - só publica quando alguém aprovar</li>
+          </ul>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M16 7.38A7.82 7.82 0 0 0 8 .5a7.82 7.82 0 0 0-8 6.88v1.24a7.82 7.82 0 0 0 8 6.88 7.82 7.82 0 0 0 8-6.88zm-1.25 0h-3a11.3 11.3 0 0 0-.43-2.54 7.6 7.6 0 0 0 1.75-1 6 6 0 0 1 1.65 3.54zm-9.18 0a9.7 9.7 0 0 1 .37-2.14A8.4 8.4 0 0 0 8 5.5a8.5 8.5 0 0 0 2.09-.26 10.2 10.2 0 0 1 .37 2.14zm4.92 1.24a9.6 9.6 0 0 1-.37 2.14 8.5 8.5 0 0 0-4.18 0 9.7 9.7 0 0 1-.37-2.14zm.4-5A12 12 0 0 0 10 2a6.9 6.9 0 0 1 2 1 6.6 6.6 0 0 1-1.14.66zm-2.6-1.86a10 10 0 0 1 1.38 2.3A7.6 7.6 0 0 1 8 4.25a7.6 7.6 0 0 1-1.67-.19 9.8 9.8 0 0 1 1.38-2.3zm-3.15 1.9A6.6 6.6 0 0 1 4 3a6.9 6.9 0 0 1 2-1 10.4 10.4 0 0 0-.86 1.66M3 3.83a7.6 7.6 0 0 0 1.75 1 11 11 0 0 0-.43 2.54h-3A6 6 0 0 1 3 3.83M1.28 8.62h3a11 11 0 0 0 .43 2.54 7.6 7.6 0 0 0-1.75 1 6 6 0 0 1-1.68-3.54m3.86 3.72A10.4 10.4 0 0 0 6 14a6.9 6.9 0 0 1-2-1 6.6 6.6 0 0 1 1.14-.66m2.57 1.9a9.8 9.8 0 0 1-1.38-2.3 7.4 7.4 0 0 1 3.34 0 9.8 9.8 0 0 1-1.38 2.3zm3.15-1.9a6.6 6.6 0 0 1 1.19.66 7.2 7.2 0 0 1-2 1 11.5 11.5 0 0 0 .81-1.66m2.14-.17a7.6 7.6 0 0 0-1.75-1 10.8 10.8 0 0 0 .43-2.54h3A6 6 0 0 1 13 12.17"/></svg> Pesquisa na web</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>Se o assistente precisa de informação atualizada, ele pesquisa na internet em tempo real:</p>
-              <ul>
-                <li>Busca documentação e referências técnicas</li>
-                <li>Consulta soluções e melhores práticas</li>
-                <li>Acessa e lê páginas da web</li>
-                <li>Verifica versões atuais de ferramentas</li>
-              </ul>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M16 7.38A7.82 7.82 0 0 0 8 .5a7.82 7.82 0 0 0-8 6.88v1.24a7.82 7.82 0 0 0 8 6.88 7.82 7.82 0 0 0 8-6.88zm-1.25 0h-3a11.3 11.3 0 0 0-.43-2.54 7.6 7.6 0 0 0 1.75-1 6 6 0 0 1 1.65 3.54zm-9.18 0a9.7 9.7 0 0 1 .37-2.14A8.4 8.4 0 0 0 8 5.5a8.5 8.5 0 0 0 2.09-.26 10.2 10.2 0 0 1 .37 2.14zm4.92 1.24a9.6 9.6 0 0 1-.37 2.14 8.5 8.5 0 0 0-4.18 0 9.7 9.7 0 0 1-.37-2.14zm.4-5A12 12 0 0 0 10 2a6.9 6.9 0 0 1 2 1 6.6 6.6 0 0 1-1.14.66zm-2.6-1.86a10 10 0 0 1 1.38 2.3A7.6 7.6 0 0 1 8 4.25a7.6 7.6 0 0 1-1.67-.19 9.8 9.8 0 0 1 1.38-2.3zm-3.15 1.9A6.6 6.6 0 0 1 4 3a6.9 6.9 0 0 1 2-1 10.4 10.4 0 0 0-.86 1.66M3 3.83a7.6 7.6 0 0 0 1.75 1 11 11 0 0 0-.43 2.54h-3A6 6 0 0 1 3 3.83M1.28 8.62h3a11 11 0 0 0 .43 2.54 7.6 7.6 0 0 0-1.75 1 6 6 0 0 1-1.68-3.54m3.86 3.72A10.4 10.4 0 0 0 6 14a6.9 6.9 0 0 1-2-1 6.6 6.6 0 0 1 1.14-.66m2.57 1.9a9.8 9.8 0 0 1-1.38-2.3 7.4 7.4 0 0 1 3.34 0 9.8 9.8 0 0 1-1.38 2.3zm3.15-1.9a6.6 6.6 0 0 1 1.19.66 7.2 7.2 0 0 1-2 1 11.5 11.5 0 0 0 .81-1.66m2.14-.17a7.6 7.6 0 0 0-1.75-1 10.8 10.8 0 0 0 .43-2.54h3A6 6 0 0 1 13 12.17"/></svg></div>
+          <h4>Pesquisa na web</h4>
+          <p>Se precisa de informação atualizada, pesquisa na internet em tempo real.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li>Busca documentação e referências técnicas</li>
+            <li>Consulta soluções e melhores práticas</li>
+            <li>Acessa e lê páginas da web</li>
+            <li>Verifica versões atuais de ferramentas</li>
+          </ul>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M14.25 1.5H1.75A1.25 1.25 0 0 0 .5 2.75v10.5a1.25 1.25 0 0 0 1.25 1.25h8.69a1.24 1.24 0 0 0 .93-.41l3.81-4.23A1.24 1.24 0 0 0 15.5 9V2.75a1.25 1.25 0 0 0-1.25-1.25M1.75 13.25V2.75h12.5v5h-3.81A1.25 1.25 0 0 0 9.19 9v4.23zm8.69 0V9h3.81z"/></svg> Integração com Notion</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>O assistente se conecta diretamente ao Notion da equipe:</p>
-              <ul>
-                <li><strong>Páginas:</strong> cria, edita, duplica, move e busca páginas</li>
-                <li><strong>Bancos de dados:</strong> cria tabelas, adiciona colunas, cria visualizações (tabela, kanban, calendário, gráfico)</li>
-                <li><strong>Comentários:</strong> participa de discussões nas páginas</li>
-                <li><strong>Busca:</strong> encontra conteúdo em fontes conectadas (Slack, Google Drive, GitHub, Jira, Linear)</li>
-              </ul>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M14.25 1.5H1.75A1.25 1.25 0 0 0 .5 2.75v10.5a1.25 1.25 0 0 0 1.25 1.25h8.69a1.24 1.24 0 0 0 .93-.41l3.81-4.23A1.24 1.24 0 0 0 15.5 9V2.75a1.25 1.25 0 0 0-1.25-1.25M1.75 13.25V2.75h12.5v5h-3.81A1.25 1.25 0 0 0 9.19 9v4.23zm8.69 0V9h3.81z"/></svg></div>
+          <h4>Integração com Notion</h4>
+          <p>Se conecta diretamente ao Notion da equipe.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li><strong>Páginas:</strong> cria, edita, duplica, move e busca páginas</li>
+            <li><strong>Bancos de dados:</strong> cria tabelas, adiciona colunas, cria visualizações (tabela, kanban, calendário, gráfico)</li>
+            <li><strong>Comentários:</strong> participa de discussões nas páginas</li>
+            <li><strong>Busca:</strong> encontra conteúdo em fontes conectadas (Slack, Google Drive, GitHub, Jira, Linear)</li>
+          </ul>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M14.82 2.5H1.18C.53 2.5 0 3.03 0 3.68V6.2c0 .65.53 1.18 1.18 1.18h13.64c.65 0 1.18-.53 1.18-1.18V3.68c0-.65-.53-1.18-1.18-1.18m-.07 3.62H1.25V3.75h13.5zm.07 2.5H1.18C.53 8.62 0 9.15 0 9.8v2.52c0 .65.53 1.18 1.18 1.18h13.64c.65 0 1.18-.53 1.18-1.18V9.8c0-.65-.53-1.18-1.18-1.18m-.07 3.63H1.25V9.87h13.5z"/></svg> Tarefas paralelas</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>Para tarefas grandes, o assistente pode dividir o trabalho em partes menores e executar várias ao mesmo tempo:</p>
-              <ul>
-                <li>Analisa a estrutura de projetos grandes rapidamente</li>
-                <li>Pesquisas complexas em vários arquivos ao mesmo tempo</li>
-                <li>Vários sub-assistentes trabalhando em paralelo para entregar mais rápido</li>
-              </ul>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M14.82 2.5H1.18C.53 2.5 0 3.03 0 3.68V6.2c0 .65.53 1.18 1.18 1.18h13.64c.65 0 1.18-.53 1.18-1.18V3.68c0-.65-.53-1.18-1.18-1.18m-.07 3.62H1.25V3.75h13.5zm.07 2.5H1.18C.53 8.62 0 9.15 0 9.8v2.52c0 .65.53 1.18 1.18 1.18h13.64c.65 0 1.18-.53 1.18-1.18V9.8c0-.65-.53-1.18-1.18-1.18m-.07 3.63H1.25V9.87h13.5z"/></svg></div>
+          <h4>Tarefas paralelas</h4>
+          <p>Para tarefas grandes, divide o trabalho em partes menores e executa várias ao mesmo tempo.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li>Analisa a estrutura de projetos grandes rapidamente</li>
+            <li>Pesquisas complexas em vários arquivos ao mesmo tempo</li>
+            <li>Vários sub-assistentes trabalhando em paralelo para entregar mais rápido</li>
+          </ul>
         </div>
 
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <h4><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M7.25 11.2v1.42h1.5V11.2a1.48 1.48 0 0 0 .85-1.32A1.55 1.55 0 0 0 8 8.38a1.55 1.55 0 0 0-1.6 1.5 1.48 1.48 0 0 0 .85 1.32"/><path d="M14.75 5H13.5A5.29 5.29 0 0 0 8 0a5.29 5.29 0 0 0-5.5 5H1.25A1.25 1.25 0 0 0 0 6.25v8.5A1.25 1.25 0 0 0 1.25 16h13.5A1.25 1.25 0 0 0 16 14.75v-8.5A1.25 1.25 0 0 0 14.75 5M8 1.25A4.05 4.05 0 0 1 12.25 5h-8.5A4.05 4.05 0 0 1 8 1.25m6.75 13.5H1.25v-8.5h13.5z"/></svg> Segurança</h4>
-            <span class="accordion-toggle">+</span>
-          </div>
-          <div class="accordion-body">
-            <div class="accordion-body-inner">
-              <p>O assistente segue regras de segurança rigorosas automaticamente:</p>
-              <ul>
-                <li>Confere se não há senhas ou chaves de acesso expostas antes de publicar</li>
-                <li>Valida ferramentas antes de instalar (evita pacotes falsos ou perigosos)</li>
-                <li>Avisa antes de executar algo que não pode ser desfeito</li>
-                <li>Detecta ambientes de produção e pede confirmação extra</li>
-              </ul>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M7.25 11.2v1.42h1.5V11.2a1.48 1.48 0 0 0 .85-1.32A1.55 1.55 0 0 0 8 8.38a1.55 1.55 0 0 0-1.6 1.5 1.48 1.48 0 0 0 .85 1.32"/><path d="M14.75 5H13.5A5.29 5.29 0 0 0 8 0a5.29 5.29 0 0 0-5.5 5H1.25A1.25 1.25 0 0 0 0 6.25v8.5A1.25 1.25 0 0 0 1.25 16h13.5A1.25 1.25 0 0 0 16 14.75v-8.5A1.25 1.25 0 0 0 14.75 5M8 1.25A4.05 4.05 0 0 1 12.25 5h-8.5A4.05 4.05 0 0 1 8 1.25m6.75 13.5H1.25v-8.5h13.5z"/></svg></div>
+          <h4>Segurança</h4>
+          <p>Segue regras de segurança rigorosas automaticamente.</p>
+          <ul style="padding-left: 24px; margin-top: 12px;">
+            <li>Confere se não há senhas ou chaves de acesso expostas antes de publicar</li>
+            <li>Valida ferramentas antes de instalar (evita pacotes falsos ou perigosos)</li>
+            <li>Avisa antes de executar algo que não pode ser desfeito</li>
+            <li>Detecta ambientes de produção e pede confirmação extra</li>
+          </ul>
         </div>
 
       </div>
@@ -1034,21 +928,6 @@
       });
     });
 
-    document.querySelectorAll('.accordion-header').forEach(function(header) {
-      header.addEventListener('click', function() {
-        var item = this.parentElement;
-        var body = item.querySelector('.accordion-body');
-        var isOpen = item.classList.contains('open');
-
-        if (isOpen) {
-          body.style.maxHeight = null;
-          item.classList.remove('open');
-        } else {
-          body.style.maxHeight = body.scrollHeight + 'px';
-          item.classList.add('open');
-        }
-      });
-    });
   </script>
 
 </body>
